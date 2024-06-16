@@ -74,7 +74,7 @@ const AddressInput = () => {
 
   const fetchAddressFromCoords = (lat, lng) => {
     console.log(lat, lng);
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=AIzaSyAmrXcjQ0-FGQFeKGwNzuVq24sY6uBeDQI`)
+    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${NEXT_PUBLIC_GOOGLE_MAPS_API_KEY_UNRESTRICTED}`)
       .then(response => response.json())
       .then(data => {
         if (data.status === 'OK') {
