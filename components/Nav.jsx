@@ -22,13 +22,13 @@ const Nav = () => {
     <nav className='flex-between w-full mb-16 pt-3'>
       <Link href='/' className='flex gap-2 flex-center'>
         <Image
-          src='/assets/images/logo.svg'
+          src='/assets/images/logo4.png'
           alt='logo'
-          width={30}
+          width={125}
           height={30}
           className='object-contain'
         />
-        <p className='logo_text'>Promptopia</p>
+        
       </Link>
 
       {/* Desktop Navigation */}
