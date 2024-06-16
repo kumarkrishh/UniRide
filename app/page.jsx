@@ -1,4 +1,6 @@
 import Feed from "@components/Feed";
+import MapComponent from "@components/Map";
+import AddressInput from "@components/AddressInput";
 
 const Home = () => (
   <section className='w-full flex-center flex-col'>
@@ -10,7 +12,11 @@ const Home = () => (
     </p>
 
     <Feed />
+    
+    <AddressInput apiKey={process.env.GOOGLE_MAP_KEY}/>
+    
   </section>
+  
 );
 
 export default Home;
