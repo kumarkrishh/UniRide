@@ -10,10 +10,12 @@ const Home = () => (
     <p className='desc text-center'>
     BruinRide is a platform for college students to connect, carpool, and cut costs. Enhance your college experience by finding travel buddies and sharing rides sustainably within your community.
     </p>
+    
+    <br />
+    
+    <AddressInput/>
 
     <Feed />
-    
-    <AddressInput apiKey={process.env.GOOGLE_MAP_KEY}/>
     
   </section>
   

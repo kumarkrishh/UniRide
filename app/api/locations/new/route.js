@@ -1,21 +1,30 @@
-import Location from "@models/location"; // Assuming the model name is Location
+// app/api/locations/new/route.js
+import Location from "@models/location";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request) => {
-    // Assume the request body includes an address, coordinates (lat, lng), and the userId
-    const { address, lat, lng, userId } = await request.json();
+    const { startAddress, destinationAddress, userId } = await request.json();
 
     try {
         await connectToDB();
 
         // Creating a new location entry with the received data
         const newLocation = new Location({
-            address,
-            coordinates: {
-                lat,
-                lng
+            userId,
+            startAddress: {
+                address: startAddress.address,
+                coordinates: {
+                    lat: startAddress.coordinates.lat,
+                    lng: startAddress.coordinates.lng
+                }
             },
-            userId
+            destinationAddress: {
+                address: destinationAddress.address,
+                coordinates: {
+                    lat: destinationAddress.coordinates.lat,
+                    lng: destinationAddress.coordinates.lng
+                }
+            }
         });
 
         await newLocation.save(); // Save the new location to the database
