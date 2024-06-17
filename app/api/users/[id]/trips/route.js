@@ -1,4 +1,4 @@
-//import Prompt from "@models/prompt";
+
 import Location from "@models/location";
 import { connectToDB } from "@utils/database";
 
