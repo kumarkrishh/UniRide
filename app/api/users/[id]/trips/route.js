@@ -8,11 +8,9 @@ export const GET = async (request, {params}) => {
 
         
         const trips = await Location.find({
-            creator: params.id
+            userId: params.id
         }).populate('userId')
-        console.log("hi");
         console.log(trips);
-        console.log("bye");
 
         return new Response(JSON.stringify(trips), { status: 200 })
     } catch (error) {
