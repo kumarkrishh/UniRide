@@ -19,7 +19,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <nav className='flex-between w-full mb-16 pt-3'>
+    <nav className='flex-between w-full mb-16 pb-3 px-20 pt-3 bg-white shadow-lg'>
       <Link href='/' className='flex gap-2 flex-center'>
         <Image
           src='/assets/images/logo4.png'
@@ -36,7 +36,7 @@ const Nav = () => {
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
             <Link href='/create-prompt' className='black_btn'>
-              Create Post
+              Find Carpool
             </Link>
 
             <button type='button' onClick={signOut} className='outline_btn'>
@@ -48,7 +48,7 @@ const Nav = () => {
                 src={session?.user.image}
                 width={37}
                 height={37}
-                className='rounded-full'
+                className='rounded-full border border-black'
                 alt='profile'
               />
             </Link>

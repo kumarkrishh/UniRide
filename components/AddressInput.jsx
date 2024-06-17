@@ -127,13 +127,15 @@ const AddressInput = () => {
   };
 
   return (
-    <div className="flex flex-col items-center w-5/12 max-w-xl mx-auto my-4 p-4 border border-gray-300 rounded-lg shadow-sm bg-white">
-      <div className="relative w-full mb-4">
+    
+    <div className="flex flex-col w-1/3 max-w-xl mx-auto my-4 p-4 rounded-lg font-inter">
+      <div className="items-center">
+      <div className="relative w-full mb-4 text-black">
         <input
           type="text"
           id="location-input"
-          placeholder="Enter your starting address here"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Start Address"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-black-800"
           value={location}
           onChange={e => setLocation(e.target.value)}
         />
@@ -151,8 +153,8 @@ const AddressInput = () => {
         <input
           type="text"
           id="destination-input"
-          placeholder="Enter your destination address here"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500"
+          placeholder="Destination Address"
+          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
           value={destination}
           onChange={e => setDestination(e.target.value)}
         />
@@ -161,25 +163,28 @@ const AddressInput = () => {
         <input
           type="date"
           id="travel-date"
-          className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+          className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
           value={date}
           onChange={e => setDate(e.target.value)}
         />
         <input
           type="time"
           id="travel-time"
-          className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500"
+          className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
           value={time}
           onChange={e => setTime(e.target.value)}
         />
       </div>
-      <button
-        onClick={handleLocationSubmit}
-        disabled={submitting}
-        className="w-full mt-2 p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300"
-      >
-        {submitting ? 'Submitting...' : 'Add Trip'}
-      </button>
+      
+  <button
+    onClick={handleLocationSubmit}
+    disabled={submitting}
+    className="mt-2 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 "
+  >
+    {submitting ? 'Submitting...' : 'Add Trip'}
+  </button>
+
+</div>
     </div>
   );
 };
