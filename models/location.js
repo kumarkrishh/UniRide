@@ -1,7 +1,8 @@
 // models/location.js
 import mongoose from 'mongoose';
+import { Schema, model, models } from 'mongoose';
 
-const locationSchema = new mongoose.Schema({
+const locationSchema = new Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
   startAddress: {
     address: String,
@@ -21,6 +22,6 @@ const locationSchema = new mongoose.Schema({
   time: String
 });
 
-const Location = mongoose.model('Location', locationSchema);
+const Location = models.Location || model('Location', locationSchema);
 
 export default Location;

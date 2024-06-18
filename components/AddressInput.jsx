@@ -14,6 +14,9 @@ const AddressInput = () => {
   const { data: session } = useSession();
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const campuses = ['UCLA', 'UCSD', 'UCSC', 'UCSF']; // Example campuses
+  const [campusStart, setCampusStart] = useState('');
+  const [campusEnd, setCampusEnd] = useState('');
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -113,9 +116,14 @@ const AddressInput = () => {
           time: time, // Sending time
         }),
       });
-
+      
       if (response.ok) {
+
+        const response = await fetch(`/api/findcarpools/${location}/${destination}/${date}/${time}/carpools2`);
+        const carpooldata = await response.json();
+        console.log(carpooldata);
         router.push('/');
+      
       } else {
         throw new Error('Failed to save location');
       }
@@ -127,64 +135,74 @@ const AddressInput = () => {
   };
 
   return (
-    
     <div className="flex flex-col w-1/3 max-w-xl mx-auto my-4 p-4 rounded-lg font-inter">
       <div className="items-center">
-      <div className="relative w-full mb-4 text-black">
-        <input
-          type="text"
-          id="location-input"
-          placeholder="Start Address"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-black-800"
-          value={location}
-          onChange={e => setLocation(e.target.value)}
-        />
-        <div className="absolute inset-y-0 right-0 flex items-center pr-3 cursor-pointer" onClick={fetchCurrentLocation}>
-          <Image
-            src='/assets/images/currlocation.svg'
-            alt='Current Location'
-            width={18}
-            height={18}
-            className='object-contain'
+        <div className="relative w-full mb-4 text-black">
+          <input
+            type="text"
+            id="location-input"
+            placeholder="Start Address"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-black-800"
+            value={location}
+            onChange={e => setLocation(e.target.value)}
+            disabled={campusStart}
+          />
+          <select
+            className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+            value={campusStart}
+            onChange={e => { setLocation(e.target.value)}}
+          >
+            <option value="">Select a Campus</option>
+            {campuses.map(campus => (
+              <option key={campus} value={campus}>{campus}</option>
+            ))}
+          </select>
+        </div>
+        <div className="relative w-full mb-4">
+          <input
+            type="text"
+            id="destination-input"
+            placeholder="Destination Address"
+            className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+            value={destination}
+            onChange={e => setDestination(e.target.value)}
+            disabled={campusEnd}
+          />
+          <select
+            className="w-full mt-2 p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+            value={campusEnd}
+            onChange={e => { setDestination(e.target.value); }}
+          >
+            <option value="">Select a Campus</option>
+            {campuses.map(campus => (
+              <option key={campus} value={campus}>{campus}</option>
+            ))}
+          </select>
+        </div>
+        <div className="flex w-full gap-2 mb-2">
+          <input
+            type="date"
+            id="travel-date"
+            className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+            value={date}
+            onChange={e => setDate(e.target.value)}
+          />
+          <input
+            type="time"
+            id="travel-time"
+            className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+            value={time}
+            onChange={e => setTime(e.target.value)}
           />
         </div>
+        <button
+          onClick={handleLocationSubmit}
+          disabled={submitting}
+          className="mt-2 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300"
+        >
+          {submitting ? 'Submitting...' : 'Add Trip'}
+        </button>
       </div>
-      <div className="relative w-full mb-4">
-        <input
-          type="text"
-          id="destination-input"
-          placeholder="Destination Address"
-          className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
-          value={destination}
-          onChange={e => setDestination(e.target.value)}
-        />
-      </div>
-      <div className="flex w-full gap-2 mb-2">
-        <input
-          type="date"
-          id="travel-date"
-          className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
-          value={date}
-          onChange={e => setDate(e.target.value)}
-        />
-        <input
-          type="time"
-          id="travel-time"
-          className="flex-grow p-2 border border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
-          value={time}
-          onChange={e => setTime(e.target.value)}
-        />
-      </div>
-      
-  <button
-    onClick={handleLocationSubmit}
-    disabled={submitting}
-    className="mt-2 px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300 "
-  >
-    {submitting ? 'Submitting...' : 'Add Trip'}
-  </button>
-
-</div>
     </div>
   );
 };

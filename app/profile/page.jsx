@@ -14,7 +14,13 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
+      const v1 = "UCLA";
+      const v2 = "UCSD";
+      const v3 = "2024-06-17";
+      const v4 = "15:00"
       const response = await fetch(`/api/users/${session?.user.id}/trips`);
+      //const response = await fetch(`/api/findcarpools/${v1}//${v2}/${v3}/${v4}/carpools2`);
+      ///UCLA/UCSD/2024-06-17/15:00/carpools2
       const data = await response.json();
 
       setMyPosts(data);

@@ -1,22 +1,22 @@
-//import Prompt from "@models/prompt";
-/*import Location from "@models/location";
+import Location from "@models/location";
 import { connectToDB } from "@utils/database";
 
 export const GET = async (request, {params}) => {
+    console.log("reached new route");
     try {
         await connectToDB()
 
         
         const trips = await Location.find({
-            creator: params.id
+            'startAddress.address': params.start,
+            'destinationAddress.address' : params.end,
+            date: params.date,
+            time: params.time
         }).populate('userId')
-        console.log("hi");
-        console.log(trips);
-        console.log("bye");
+        //console.log(trips);
 
         return new Response(JSON.stringify(trips), { status: 200 })
     } catch (error) {
         return new Response("Failed to fetch all prompts", { status: 500 })
     }
 } 
-    */
