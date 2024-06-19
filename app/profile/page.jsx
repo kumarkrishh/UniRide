@@ -14,13 +14,8 @@ const MyProfile = () => {
 
   useEffect(() => {
     const fetchPosts = async () => {
-      const v1 = "UCLA";
-      const v2 = "UCSD";
-      const v3 = "2024-06-17";
-      const v4 = "15:00"
       const response = await fetch(`/api/users/${session?.user.id}/trips`);
-      //const response = await fetch(`/api/findcarpools/${v1}//${v2}/${v3}/${v4}/carpools2`);
-      ///UCLA/UCSD/2024-06-17/15:00/carpools2
+
       const data = await response.json();
 
       setMyPosts(data);
@@ -34,13 +29,13 @@ const MyProfile = () => {
   };
 
   const handleDelete = async (post) => {
-    const hasConfirmed = confirm(
+    /*const hasConfirmed = confirm(
       "Are you sure you want to delete this prompt?"
-    );
+    );*/
 
-    if (hasConfirmed) {
+    //if (hasConfirmed) {
       try {
-        await fetch(`/api/prompt/${post._id.toString()}`, {
+        await fetch(`/api/locations/${post._id.toString()}`, {
           method: "DELETE",
         });
 
@@ -50,7 +45,7 @@ const MyProfile = () => {
       } catch (error) {
         console.log(error);
       }
-    }
+    //}
   };
 
   return (
