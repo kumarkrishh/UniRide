@@ -74,10 +74,9 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           console.log("sus", post.userId.username);
           console.log(session?.user.name);
           
-          
-          
-          router.push({ pathname: `/req-rideshare/${String(post.userId._id)}/folder`, query: { id: "32142" }
-        }, `/req-rideshare/${post.userId._id}/folder`);
+          session.user.chatwithid = post.userId._id;
+          session.user.chatwithname = post.userId.username;
+          router.push(`/req-rideshare`);
           
         }}
       >

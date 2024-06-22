@@ -4,7 +4,8 @@ import { useState, useEffect } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
 import { useSession } from 'next-auth/react';
-import "@styles/chats.css";
+import 'stream-chat-react/dist/css/index.css';
+
 
 const ChatsPage = ({ otherUserId }) => {
     const [client, setClient] = useState(null);
@@ -19,11 +20,12 @@ const ChatsPage = ({ otherUserId }) => {
 
         const initChat = async () => {
             try {
-                const response = await fetch(`/api/newchatuser/${session.user.id}/gettoken`);
+                const response = await fetch(`/api/newchatuser/${session.user.id}/${session.user.chatwithid}/${session.user.chatwithname}/gettoken`);
+                //await fetch(`/api/newchatuser/${session.user.chatwithid}/${session.user.chatwithid}/gettoken`);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 const data = await response.json();
 
-                console.log("Data received:", data); // Data should contain token and userId
+                console.log("Data received:", session.user.chatwithid); // Data should contain token and userId
                 console.log("Token:", data.token); // Access the token
                 console.log("UserID:", data.userId); // Access the user ID
 
@@ -32,15 +34,22 @@ const ChatsPage = ({ otherUserId }) => {
                 if (client) {
                     await client.disconnectUser();
                 }
+
+                
+                
+                
                 
                 await chatClient.connectUser({
                     id: data.userId,
                     name: session?.user.name,
                     image: `https://getstream.io/random_png/?name=bob`
                 }, data.token);
+                
+                
 
-                const newChannel = chatClient.channel('messaging', 'custom_channel_id', {
-                    members: [data.userId]
+                const uniqueChannelId = [data.userId, session.user.chatwithid].sort().join('_');
+                const newChannel = chatClient.channel('messaging', uniqueChannelId, {
+                    members: [data.userId, session.user.chatwithid]
                 });
 
                 await newChannel.watch();

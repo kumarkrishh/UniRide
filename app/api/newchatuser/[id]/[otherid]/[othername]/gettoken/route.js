@@ -3,11 +3,16 @@ import { StreamChat } from 'stream-chat';
 export const GET = async (req, {params}) => {
     
     try {
-        const serverClient = StreamChat.getInstance('mn3h6qnhxxpz', '3jmy6acxbdq3g8xzfq3x8pfqrpartv3muqx6ywg52umtm7ry56k95xqwt48fwzb2');
+        const serverClient = StreamChat.getInstance(process.env.GETSTREAM_API_KEY, process.env.GETSTREAM_API_SECRET);
         const token = serverClient.createToken(params.id);
-        //console.log("token: ", token);
+        await serverClient.upsertUser({
+            id: params.otherid,
+            name: params.othername,
+            image: `https://getstream.io/random_png/?name=bob`
+        });
+       
         return new Response(JSON.stringify({ token, userId: params.id }), { status: 200 })
-        //res.status(200).json({ token, userId: id }); // Return the token and userId in the response
+       
     } catch (error) {
         console.error('Error generating token:', error);
         return new Response("Failed to fetch all prompts", { status: 500 })

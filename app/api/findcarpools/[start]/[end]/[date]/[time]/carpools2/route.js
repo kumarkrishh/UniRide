@@ -5,7 +5,6 @@ export const GET = async (request, {params}) => {
     console.log("reached new route");
     try {
         await connectToDB()
-
         
         const trips = await Location.find({
             'startAddress.address': params.start,
@@ -13,7 +12,6 @@ export const GET = async (request, {params}) => {
             date: params.date,
             time: params.time
         }).populate('userId')
-        //console.log(trips);
 
         return new Response(JSON.stringify(trips), { status: 200 })
     } catch (error) {
