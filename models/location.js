@@ -4,6 +4,7 @@ import { Schema, model, models } from 'mongoose';
 
 const locationSchema = new Schema({
   userId: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+  userName: String,
   startAddress: {
     address: String,
     coordinates: {

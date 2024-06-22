@@ -3,7 +3,7 @@ import Location from "@models/location";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request) => {
-    const { startAddress, destinationAddress, userId, date, time } = await request.json();
+    const { startAddress, destinationAddress, userId, date, time, userName } = await request.json();
 
     try {
         await connectToDB();
@@ -11,6 +11,7 @@ export const POST = async (request) => {
         // Creating a new location entry with the received data
         const newLocation = new Location({
             userId,
+            userName,
             startAddress: {
                 address: startAddress.address,
                 coordinates: {

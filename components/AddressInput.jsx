@@ -101,6 +101,7 @@ const AddressInput = () => {
         },
         body: JSON.stringify({
           userId: session?.user.id,
+          userName: "username",
           startAddress: {
             address: location,
             coordinates: coordinates

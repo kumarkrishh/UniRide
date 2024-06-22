@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import axios from "axios";
 
 const Nav = () => {
   const { data: session } = useSession();
@@ -35,6 +36,9 @@ const Nav = () => {
       <div className='sm:flex hidden'>
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
+            <Link href='/req-rideshare' className='black_btn'>
+              Messages
+            </Link>
             <Link href='/create-prompt' className='black_btn'>
               Find RideShares
             </Link>
@@ -62,6 +66,7 @@ const Nav = () => {
                   key={provider.name}
                   onClick={() => {
                     signIn(provider.id);
+                    
                   }}
                   className='black_btn'
                 >
@@ -101,6 +106,7 @@ const Nav = () => {
                 >
                   Create Prompt
                 </Link>
+                
                 <button
                   type='button'
                   onClick={() => {

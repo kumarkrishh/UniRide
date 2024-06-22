@@ -4,6 +4,8 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
+import axios from 'axios';
+
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
@@ -68,7 +70,16 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       { pathName === "/create-prompt" && (
         <button
         className='px-4 py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600 ml-4'
-        onClick={() => router.push(`/req-rideshare/${post._id}`)}
+        onClick={ () => {
+          console.log("sus", post.userId.username);
+          console.log(session?.user.name);
+          
+          
+          
+          router.push({ pathname: `/req-rideshare/${String(post.userId._id)}/folder`, query: { id: "32142" }
+        }, `/req-rideshare/${post.userId._id}/folder`);
+          
+        }}
       >
         Request Rideshare
       </button>
