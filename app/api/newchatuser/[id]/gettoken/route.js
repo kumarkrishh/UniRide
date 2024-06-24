@@ -5,11 +5,7 @@ export const GET = async (req, {params}) => {
     try {
         const serverClient = StreamChat.getInstance(process.env.GETSTREAM_API_KEY, process.env.GETSTREAM_API_SECRET);
         const token = serverClient.createToken(params.id);
-        await serverClient.upsertUser({
-            id: params.otherid,
-            name: params.othername,
-            image: `https://getstream.io/random_png/?name=bob`
-        });
+        
        
         return new Response(JSON.stringify({ token, userId: params.id }), { status: 200 })
        

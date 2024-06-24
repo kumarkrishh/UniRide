@@ -76,6 +76,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           
           session.user.chatwithid = post.userId._id;
           session.user.chatwithname = post.userId.username;
+          session.user.chatwithimage = post.userId.image;
           router.push(`/req-rideshare`);
           
         }}

@@ -7,7 +7,7 @@ import { useSession } from 'next-auth/react';
 import 'stream-chat-react/dist/css/index.css';
 
 
-const ChatsPage = ({ otherUserId }) => {
+const RegChatsPage = ({ otherUserId }) => {
   const [client, setClient] = useState(null);
   const [channels, setChannels] = useState([]);
   const [activeChannel, setActiveChannel] = useState(null);
@@ -22,7 +22,7 @@ const ChatsPage = ({ otherUserId }) => {
     const initChat = async () => {
       try {
         const chatwithimageEncoded = encodeURIComponent(session.user.chatwithimage);
-        const response = await fetch(`/api/newchatuser/${session.user.id}/${session.user.chatwithid}/${session.user.chatwithname}/${chatwithimageEncoded}/gettoken`);
+        const response = await fetch(`/api/newchatuser/${session.user.id}/gettoken`);
 
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
         const data = await response.json();
@@ -49,14 +49,10 @@ const ChatsPage = ({ otherUserId }) => {
         setClient(chatClient);
         setChannels(userChannels);
 
-        // Create a new channel
-        const uniqueChannelId = [data.userId, session.user.chatwithid].sort().join('_');
-        const newChannel = chatClient.channel('messaging', uniqueChannelId, {
-          members: [data.userId, session.user.chatwithid]
-        });
+        
 
-        await newChannel.watch();
-        setActiveChannel(newChannel);
+        await userChannels[0].watch();
+        setActiveChannel(userChannels[0]);
       } catch (error) {
         console.error("Error initializing chat:", error);
       }
@@ -244,4 +240,4 @@ const ChatsPage = ({ otherUserId }) => {
   );
 };
 
-export default ChatsPage;
+export default RegChatsPage;

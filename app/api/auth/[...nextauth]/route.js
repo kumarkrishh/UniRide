@@ -18,6 +18,7 @@ const handler = NextAuth({
       session.user.id = sessionUser._id.toString();
       session.user.chatwithid = "";
       session.user.chatwithname = "";
+      session.user.chatwithimage = "";
       
       return session;
     },
@@ -35,7 +36,7 @@ const handler = NextAuth({
             image: profile.picture,
           });
         }
-        
+
         return true
       } catch (error) {
         console.log("Error checking if user exists: ", error.message);
