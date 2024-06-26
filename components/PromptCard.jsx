@@ -27,7 +27,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
               className='rounded-full object-contain'
             />
           </div>
-          {session?.user.id === post.userId._id && pathName === "/profile" && (
+          {session?.user.id === post.userId._id && pathName === "/my-trips" && (
             <div className='flex items-center gap-3'>
               <button 
                 className='px-4 py-2 text-sm text-white bg-blue-500 rounded hover:bg-blue-600'

@@ -36,8 +36,14 @@ const Nav = () => {
       <div className='sm:flex hidden'>
         {session?.user ? (
           <div className='flex gap-3 md:gap-5'>
+            <Link href='/create-prompt' className='black_btn'>
+              Notifications
+            </Link>
             <Link href='/chatlist' className='black_btn'>
               Messages
+            </Link>
+            <Link href='/my-trips' className='black_btn'>
+              My Trips
             </Link>
             <Link href='/create-prompt' className='black_btn'>
               Find RideShares
@@ -50,7 +56,7 @@ const Nav = () => {
               Sign Out
             </button>
 
-            <Link href='/profile'>
+            <Link href='/edit-profile'>
               <Image
                 src={session?.user.image}
                 width={37}
