@@ -12,7 +12,18 @@ const UserSchema = new Schema({
   },
   image: {
     type: String,
+  },
+  college: {
+    type: String,
+    required: [true, 'Email is required!'],
+  },
+  number: {
+    type: String
+  },
+  bio: {
+    type: String
   }
+
 });
 
 const User = models.User || model("User", UserSchema);

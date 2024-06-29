@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState } from 'react';
@@ -71,27 +70,13 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       { pathName === "/create-prompt" && (
         <button
         className='px-4 py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600 ml-4'
-        onClick={ async () => {
+        onClick={ () => {
           console.log("sus", post.userId.username);
           console.log(session?.user.name);
           
           session.user.chatwithid = post.userId._id;
           session.user.chatwithname = post.userId.username;
           session.user.chatwithimage = post.userId.image;
-
-          try {
-            const notificationMessage = `${session?.user.name} has requested a rideshare with you.`;
-      
-            await axios.post(`/api/addnotif/${session.user.chatwithid}/${session.user.id}/${notificationMessage}`, {
-              senderID: session?.user.id,
-              message: notificationMessage
-            });
-      
-            router.push(`/req-rideshare`);
-          } catch (error) {
-            console.error('Error sending notification:', error);
-          }
-
           router.push(`/req-rideshare`);
           
         }}

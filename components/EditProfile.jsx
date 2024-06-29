@@ -9,70 +9,59 @@ const EditProfile = () => {
   const router = useRouter();
 
   const [profile, setProfile] = useState({
-    name: "",
+    username: "",
     email: "",
-    phoneNumber: "",
+    number: "",
     college: "",
-    profilePicture: "",
+    image: "",
     bio: "",
-    carDetails: {
-      make: "",
-      model: "",
-      year: ""
-    },
-    pickupLocation: "",
-    dropoffLocation: "",
-    availableDays: "",
-    availableTimes: ""
   });
+
+  const [showMessage, setShowMessage] = useState(false);
 
   useEffect(() => {
     if (session?.user) {
-      setProfile((prevProfile) => ({
-        ...prevProfile,
-        name: session.user.name || "",
-        email: session.user.email || ""
-      }));
       fetchProfile();
     }
   }, [session?.user]);
 
   const fetchProfile = async () => {
-    const response = await fetch(`/api/users/${session?.user.id}/profile`);
+    const response = await fetch(`/api/fetchprofile/${session?.user.id}`);
     const data = await response.json();
-    setProfile(data);
+    setProfile({
+      username: data.username || "",
+      email: data.email || "",
+      number: data.number || "",
+      college: data.college || "",
+      image: data.image || "",
+      bio: data.bio || ""
+    });
   };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    const [mainKey, subKey] = name.split('.');
-    if (subKey) {
-      setProfile((prevProfile) => ({
-        ...prevProfile,
-        [mainKey]: {
-          ...prevProfile[mainKey],
-          [subKey]: value
-        }
-      }));
-    } else {
-      setProfile((prevProfile) => ({
-        ...prevProfile,
-        [name]: value
-      }));
-    }
+    setProfile((prevProfile) => ({
+      ...prevProfile,
+      [name]: value
+    }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await fetch(`/api/users/${session?.user.id}/profile`, {
+      const response = await fetch(`/api/fetchprofile/${session?.user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify(profile)
       });
-      router.push("/my-profile");
+      if (response.ok) {
+        setShowMessage(true);
+        setTimeout(() => setShowMessage(false), 3000); // Hide the message after 3 seconds
+      } else {
+        console.error("Failed to update profile");
+      }
     } catch (error) {
       console.error(error);
     }
@@ -84,11 +73,11 @@ const EditProfile = () => {
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Name</label>
+            <label className="block text-sm font-medium text-gray-700">Username</label>
             <input
               type="text"
-              name="name"
-              value={profile.name}
+              name="username"
+              value={profile.username}
               onChange={handleChange}
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -109,8 +98,8 @@ const EditProfile = () => {
             <label className="block text-sm font-medium text-gray-700">Phone Number</label>
             <input
               type="text"
-              name="phoneNumber"
-              value={profile.phoneNumber}
+              name="number"
+              value={profile.number}
               onChange={handleChange}
               required
               className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
@@ -146,6 +135,12 @@ const EditProfile = () => {
           Save
         </button>
       </form>
+
+      {showMessage && (
+        <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-md shadow-lg transition-transform transform-gpu ease-in-out duration-300">
+          Profile Updated Successfully!
+        </div>
+      )}
     </div>
   );
 };

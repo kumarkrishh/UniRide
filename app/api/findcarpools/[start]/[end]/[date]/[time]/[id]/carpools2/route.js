@@ -10,7 +10,8 @@ export const GET = async (request, {params}) => {
             'startAddress.address': params.start,
             'destinationAddress.address' : params.end,
             date: params.date,
-            time: params.time
+            time: params.time,
+            userId: { $ne: params.id }
         }).populate('userId')
 
         return new Response(JSON.stringify(trips), { status: 200 })

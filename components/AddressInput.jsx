@@ -116,7 +116,7 @@ const AddressInput = () => {
       });
 
       if (response.ok) {
-        const fetchResponse = await fetch(`/api/findcarpools/${location}/${destination}/${date}/${time}/carpools2`);
+        const fetchResponse = await fetch(`/api/findcarpools/${location}/${destination}/${date}/${time}/${session.user.id}/carpools2`);
         const carpooldata = await fetchResponse.json();
         console.log(carpooldata);
         setCarpoolData(carpooldata);
