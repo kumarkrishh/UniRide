@@ -39,6 +39,9 @@ const Nav = () => {
             <Link href='/chatlist' className='black_btn'>
               Messages
             </Link>
+            <Link href='/mynotifications' className='black_btn'>
+              Notifications
+            </Link>
             <Link href='/my-trips' className='black_btn'>
               My Trips
             </Link>

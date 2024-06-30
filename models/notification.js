@@ -2,6 +2,9 @@ import { Schema, model, models } from 'mongoose';
 import { ObjectId } from 'mongodb';
 
 const NotificationSchema = new Schema({
+  id: {
+    type: String
+  },
   recipientId: {
     type: Schema.Types.ObjectId,
     ref: 'User',
@@ -19,6 +22,12 @@ const NotificationSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now,
+  },
+  chatwithname: {
+    type: String,
+  },
+  chatwithimage: {
+    type: String,
   },
 });
 

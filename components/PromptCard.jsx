@@ -6,13 +6,33 @@ import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 
-
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
   const pathName = usePathname();
   const router = useRouter();
-  
-  const [copied, setCopied] = useState("");
+
+  const [requestSent, setRequestSent] = useState(false);
+
+  const handleButtonClick = async () => {
+    session.user.chatwithid = post.userId._id;
+      session.user.chatwithname = post.userId.username;
+      session.user.chatwithimage = post.userId.image;
+    if (!requestSent) {
+      
+
+      try {
+        const notificationMessage = `${session?.user.name} has requested a rideshare with you.`;
+        const encodedChatWithImage = encodeURIComponent(session.user.chatwithimage);
+        await axios.post(`/api/addnotif/${session.user.chatwithid}/${session.user.id}/${notificationMessage}/${session.user.chatwithname}/${encodedChatWithImage}`);
+
+        setRequestSent(true);
+      } catch (error) {
+        console.error('Error sending notification:', error);
+      }
+    } else {
+      setRequestSent(false);
+    }
+  };
 
   return (
     <div className='prompt_card shadow-lg p-6 rounded-lg bg-white flex justify-between items-center'>
@@ -69,24 +89,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
       </div>
       { pathName === "/create-prompt" && (
         <button
-        className='px-4 py-2 text-sm text-white bg-green-500 rounded hover:bg-green-600 ml-4'
-        onClick={ () => {
-          console.log("sus", post.userId.username);
-          console.log(session?.user.name);
-          
-          session.user.chatwithid = post.userId._id;
-          session.user.chatwithname = post.userId.username;
-          session.user.chatwithimage = post.userId.image;
-          router.push(`/req-rideshare`);
-          
-        }}
-      >
-        Request Rideshare
-      </button>
+          className={`px-4 py-2 text-sm text-white rounded ml-4 ${requestSent ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600'}`}
+          onClick={handleButtonClick}
+        >
+          {requestSent ? 'Request Sent' : 'Request Rideshare'}
+        </button>
       )}
-      
     </div>
-  )
+  );
 }
 
 export default PromptCard;
