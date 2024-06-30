@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import PromptCard from "./PromptCard";
 import { motion, AnimatePresence } from 'framer-motion';
@@ -14,7 +13,6 @@ const AddressInput = () => {
   const [step, setStep] = useState(1); // Step state to control field visibility
   const [startFromCampus, setStartFromCampus] = useState(null);
   const [endAtCampus, setEndAtCampus] = useState(null);
-  const router = useRouter();
   const { data: session } = useSession();
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');

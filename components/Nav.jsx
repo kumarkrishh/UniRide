@@ -2,13 +2,11 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { signIn, signOut, useSession, getProviders } from "next-auth/react";
-import axios from "axios";
 
 const Nav = () => {
-  const { data: session } = useSession();
-
+  const { data: session, status } = useSession();
   const [providers, setProviders] = useState(null);
   const [toggleDropdown, setToggleDropdown] = useState(false);
 
@@ -18,6 +16,10 @@ const Nav = () => {
       setProviders(res);
     })();
   }, []);
+
+  const sessionStatus = useMemo(() => {
+    return { session, status };
+  }, [session, status]);
 
   return (
     <nav className='flex-between w-full mb-16 pb-3 px-20 pt-3 bg-white shadow-lg'>
@@ -29,12 +31,11 @@ const Nav = () => {
           height={30}
           className='object-contain'
         />
-        
       </Link>
 
       {/* Desktop Navigation */}
       <div className='sm:flex hidden'>
-        {session?.user ? (
+        {sessionStatus.session?.user ? (
           <div className='flex gap-3 md:gap-5'>
             <Link href='/chatlist' className='black_btn'>
               Messages
@@ -58,7 +59,7 @@ const Nav = () => {
 
             <Link href='/edit-profile'>
               <Image
-                src={session?.user.image}
+                src={sessionStatus.session.user.image}
                 width={37}
                 height={37}
                 className='rounded-full border border-black'
@@ -73,10 +74,7 @@ const Nav = () => {
                 <button
                   type='button'
                   key={provider.name}
-                  onClick={() => {
-                    signIn(provider.id);
-                    
-                  }}
+                  onClick={() => signIn(provider.id)}
                   className='black_btn'
                 >
                   Sign in
@@ -88,10 +86,10 @@ const Nav = () => {
 
       {/* Mobile Navigation */}
       <div className='sm:hidden flex relative'>
-        {session?.user ? (
+        {sessionStatus.session?.user ? (
           <div className='flex'>
             <Image
-              src={session?.user.image}
+              src={sessionStatus.session.user.image}
               width={37}
               height={37}
               className='rounded-full'
@@ -115,7 +113,7 @@ const Nav = () => {
                 >
                   Create Prompt
                 </Link>
-                
+
                 <button
                   type='button'
                   onClick={() => {
@@ -136,9 +134,7 @@ const Nav = () => {
                 <button
                   type='button'
                   key={provider.name}
-                  onClick={() => {
-                    signIn(provider.id);
-                  }}
+                  onClick={() => signIn(provider.id)}
                   className='black_btn'
                 >
                   Sign in
