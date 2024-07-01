@@ -8,18 +8,13 @@ import { motion, AnimatePresence } from 'framer-motion';
 const AddressInput = () => {
   const [location, setLocation] = useState('');
   const [destination, setDestination] = useState('');
-  const [startcoordinates, setstartCoordinates] = useState({ lat: null, lng: null });
-  const [endcoordinates, setendCoordinates] = useState({ lat: null, lng: null });
+  const [coordinates, setCoordinates] = useState({ lat: null, lng: null });
+  const [destinationCoordinates, setDestinationCoordinates] = useState({ lat: null, lng: null });
   const [submitting, setSubmitting] = useState(false);
-  const [step, setStep] = useState(1); // Step state to control field visibility
-  const [startFromCampus, setStartFromCampus] = useState(null);
-  const [endAtCampus, setEndAtCampus] = useState(null);
+  const [step, setStep] = useState(1);
   const { data: session } = useSession();
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const campuses = ['UCLA', 'UCSD', 'UCSC', 'UCSF']; // Example campuses
-  const [campusStart, setCampusStart] = useState('');
-  const [campusEnd, setCampusEnd] = useState('');
   const [carpoolData, setCarpoolData] = useState([]);
 
   useEffect(() => {
@@ -48,7 +43,7 @@ const AddressInput = () => {
         const place = startAutocomplete.getPlace();
         if (place.geometry) {
           setLocation(place.formatted_address);
-          setstartCoordinates({
+          setCoordinates({
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng()
           });
@@ -62,7 +57,7 @@ const AddressInput = () => {
         const place = destinationAutocomplete.getPlace();
         if (place.geometry) {
           setDestination(place.formatted_address);
-          setendCoordinates({
+          setDestinationCoordinates({
             lat: place.geometry.location.lat(),
             lng: place.geometry.location.lng()
           });
@@ -73,21 +68,7 @@ const AddressInput = () => {
 
   useEffect(() => {
     initAutocomplete();
-  }, [startFromCampus, endAtCampus]);
-
-  const fetchAddressFromCoords = (lat, lng) => {
-    fetch(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${lat},${lng}&key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY_UNRESTRICTED}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.status === 'OK') {
-          setLocation(data.results[0].formatted_address);
-        } else {
-          alert('Failed to get address');
-        }
-      }).catch(() => {
-        alert('Failed to get address');
-      });
-  };
+  }, []);
 
   const handleLocationSubmit = async () => {
     if (!session) {
@@ -106,21 +87,35 @@ const AddressInput = () => {
           userName: "username",
           startAddress: {
             address: location,
-            coordinates: startcoordinates
+            coordinates: coordinates
           },
           destinationAddress: {
             address: destination,
-            coordinates: endcoordinates // Handle destination coordinates similarly if needed
+            coordinates: destinationCoordinates
           },
-          date: date, // Sending date
-          time: time, // Sending time
+          date: date,
+          time: time,
         }),
       });
 
       if (response.ok) {
-        const fetchResponse = await fetch(`/api/findcarpools/${location}/${destination}/${date}/${time}/${session.user.id}/carpools2`);
+        const fetchResponse = await fetch(`/api/findcarpools`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            location,
+            destination,
+            date,
+            time,
+            userId: session.user.id,
+            coordinates,
+            destinationCoordinates
+          }),
+        });
         const carpooldata = await fetchResponse.json();
-
+        console.log(carpooldata);
         setCarpoolData(carpooldata);
       } else {
         throw new Error('Failed to save location');
