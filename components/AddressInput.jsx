@@ -129,7 +129,7 @@ const AddressInput = () => {
 
   return (
     <div className="flex flex-col w-full max-w-xl mx-auto my-4 p-4 rounded-lg font-inter">
-      <div className="items-center">
+      <div className="items-center mb-8">
         <AnimatePresence>
           {step === 1 && (
             <motion.div
@@ -148,11 +148,12 @@ const AddressInput = () => {
                   className="relative w-full mb-4"
                 >
                   <div className="relative w-full mb-4">
+                    <label htmlFor="location-input" className="block text-sm font-medium text-gray-700">Start Address</label>
                     <input
                       type="text"
                       id="location-input"
-                      placeholder="Start Address"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-black-800"
+                      placeholder="Enter your starting address"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-gray-800"
                       value={location}
                       onChange={e => setLocation(e.target.value)}
                     />
@@ -179,11 +180,12 @@ const AddressInput = () => {
                   className="relative w-full mb-4"
                 >
                   <div className="relative w-full mb-4">
+                    <label htmlFor="destination-input" className="block text-sm font-medium text-gray-700">End Address</label>
                     <input
                       type="text"
                       id="destination-input"
-                      placeholder="End Address"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-black-800"
+                      placeholder="Enter your destination address"
+                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-gray-800"
                       value={destination}
                       onChange={e => setDestination(e.target.value)}
                     />
@@ -203,21 +205,27 @@ const AddressInput = () => {
               className="relative w-full mb-4"
             >
               <div className="relative w-full mb-4">
-                <div className="flex w-full gap-2 mb-4">
-                  <input
-                    type="date"
-                    id="travel-date"
-                    className="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
-                    value={date}
-                    onChange={e => setDate(e.target.value)}
-                  />
-                  <input
-                    type="time"
-                    id="travel-time"
-                    className="flex-grow p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
-                    value={time}
-                    onChange={e => setTime(e.target.value)}
-                  />
+                <div className="flex gap-4 mb-4">
+                  <div className="flex flex-col flex-1">
+                    <label htmlFor="travel-date" className="block text-sm font-medium text-gray-700">Travel Date</label>
+                    <input
+                      type="date"
+                      id="travel-date"
+                      className="p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+                      value={date}
+                      onChange={e => setDate(e.target.value)}
+                    />
+                  </div>
+                  <div className="flex flex-col flex-1">
+                    <label htmlFor="travel-time" className="block text-sm font-medium text-gray-700">Travel Time</label>
+                    <input
+                      type="time"
+                      id="travel-time"
+                      className="p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+                      value={time}
+                      onChange={e => setTime(e.target.value)}
+                    />
+                  </div>
                 </div>
                 <div className="flex justify-end mt-4">
                   <button
@@ -233,16 +241,21 @@ const AddressInput = () => {
           )}
         </AnimatePresence>
       </div>
-      <div className='mt-10 prompt_layout flex flex-col gap-4'>
-        {carpoolData.map((post) => (
-          <PromptCard
-            key={post._id}
-            post={post}
-            handleEdit={() => handleEdit && handleEdit(post)}
-            handleDelete={() => handleDelete && handleDelete(post)}
-          />
-        ))}
-      </div>
+      {carpoolData.length > 0 && (
+        <div className="mt-10 w-full">
+          <h2 className="text-2xl font-bold text-gray-700 mb-4">Search Results</h2>
+          <div className="prompt_layout flex flex-col gap-4 w-full">
+            {carpoolData.map((post) => (
+              <PromptCard
+                key={post._id}
+                post={post}
+                handleEdit={() => handleEdit && handleEdit(post)}
+                handleDelete={() => handleDelete && handleDelete(post)}
+              />
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };
