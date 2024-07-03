@@ -29,9 +29,9 @@ const RegChatsPage = ({ otherUserId }) => {
 
         const chatClient = StreamChat.getInstance('mn3h6qnhxxpz');
 
-        if (client) {
+        /*if (client) {
           await client.disconnectUser();
-        }
+        } */
 
         await chatClient.connectUser({
           id: data.userId,
@@ -61,10 +61,10 @@ const RegChatsPage = ({ otherUserId }) => {
     initChat();
 
     return async () => {
-      if (client) {
+      /*if (client) {
         await client.disconnectUser();
         console.log("User disconnected successfully");
-      }
+      } */
     };
   }, [session, otherUserId]);
 

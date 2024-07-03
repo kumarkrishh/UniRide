@@ -19,6 +19,9 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const handleButtonClick = async () => {
     if (!requestSent) {
       try {
+        session.user.chatwithid = post.userId._id;
+    session.user.chatwithname = post.userId.username;
+    session.user.chatwithimage = post.userId.image;
         const notificationMessage = `${session?.user.name} has requested a rideshare with you.`;
         const encodedChatWithImage = encodeURIComponent(session.user.chatwithimage);
         await axios.post(`/api/addnotif/${session.user.chatwithid}/${session.user.id}/${notificationMessage}/${session.user.chatwithname}/${encodedChatWithImage}`);

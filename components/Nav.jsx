@@ -49,9 +49,6 @@ const Nav = () => {
             <Link href='/create-prompt' className='black_btn'>
               Find RideShares
             </Link>
-            <Link href='/create-prompt' className='black_btn'>
-              Post Trip
-            </Link>
 
             <button type='button' onClick={signOut} className='outline_btn'>
               Sign Out

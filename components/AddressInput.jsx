@@ -16,6 +16,8 @@ const AddressInput = () => {
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
   const [carpoolData, setCarpoolData] = useState([]);
+  const [filterOption, setFilterOption] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -242,20 +244,31 @@ const AddressInput = () => {
         </AnimatePresence>
       </div>
       {carpoolData.length > 0 && (
-        <div className="mt-10 w-full">
-          <h2 className="text-2xl font-bold text-gray-700 mb-4">Search Results</h2>
-          <div className="prompt_layout flex flex-col gap-4 w-full">
-            {carpoolData.map((post) => (
-              <PromptCard
-                key={post._id}
-                post={post}
-                handleEdit={() => handleEdit && handleEdit(post)}
-                handleDelete={() => handleDelete && handleDelete(post)}
-              />
-            ))}
-          </div>
-        </div>
-      )}
+      <div className="mt-10 w-full flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-gray-700">Search Results</h2>
+        <select
+          className="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          value={filterOption}
+          onChange={(e) => setFilterOption(e.target.value)}
+        >
+          <option value="">Select Filter</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      </div>
+    )}
+
+    <div className="prompt_layout flex flex-wrap gap-4 w-full">  {/* Adjusted for better layout handling */}
+      {carpoolData.map((post) => (
+        <PromptCard
+          key={post._id}
+          post={post}
+          handleEdit={() => handleEdit && handleEdit(post)}
+          handleDelete={() => handleDelete && handleDelete(post)}
+        />
+      ))}
+    </div>
     </div>
   );
 };
