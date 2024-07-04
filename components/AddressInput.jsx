@@ -130,7 +130,7 @@ const AddressInput = () => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-xl mx-auto my-4 p-4 rounded-lg font-inter">
+    <div className="flex flex-col w-full max-w-xl mx-auto my-4 p-4 rounded-lg  text-white">
       <div className="items-center mb-8">
         <AnimatePresence>
           {step === 1 && (
@@ -140,9 +140,9 @@ const AddressInput = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5 }}
-              className="relative w-full mb-4 text-black"
+              className="relative w-full mb-4"
             >
-              <div className="relative w-full mb-4 text-black">
+              <div className="relative w-full mb-4">
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -150,12 +150,12 @@ const AddressInput = () => {
                   className="relative w-full mb-4"
                 >
                   <div className="relative w-full mb-4">
-                    <label htmlFor="location-input" className="block text-sm font-medium text-gray-700">Start Address</label>
+                    <label htmlFor="location-input" className="block text-sm font-medium text-gray-300">Start Address</label>
                     <input
                       type="text"
                       id="location-input"
                       placeholder="Enter your starting address"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-gray-800"
+                      className="w-full p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 placeholder-gray-400 text-white"
                       value={location}
                       onChange={e => setLocation(e.target.value)}
                     />
@@ -172,9 +172,9 @@ const AddressInput = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5 }}
-              className="relative w-full mb-4 text-black"
+              className="relative w-full mb-4"
             >
-              <div className="relative w-full mb-4 text-black">
+              <div className="relative w-full mb-4">
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
@@ -182,12 +182,12 @@ const AddressInput = () => {
                   className="relative w-full mb-4"
                 >
                   <div className="relative w-full mb-4">
-                    <label htmlFor="destination-input" className="block text-sm font-medium text-gray-700">End Address</label>
+                    <label htmlFor="destination-input" className="block text-sm font-medium text-gray-300">End Address</label>
                     <input
                       type="text"
                       id="destination-input"
                       placeholder="Enter your destination address"
-                      className="w-full p-3 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100 placeholder-gray-800"
+                      className="w-full p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 placeholder-gray-400 text-white"
                       value={destination}
                       onChange={e => setDestination(e.target.value)}
                     />
@@ -209,21 +209,21 @@ const AddressInput = () => {
               <div className="relative w-full mb-4">
                 <div className="flex gap-4 mb-4">
                   <div className="flex flex-col flex-1">
-                    <label htmlFor="travel-date" className="block text-sm font-medium text-gray-700">Travel Date</label>
+                    <label htmlFor="travel-date" className="block text-sm font-medium text-gray-300">Travel Date</label>
                     <input
                       type="date"
                       id="travel-date"
-                      className="p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+                      className="p-2 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
                       value={date}
                       onChange={e => setDate(e.target.value)}
                     />
                   </div>
                   <div className="flex flex-col flex-1">
-                    <label htmlFor="travel-time" className="block text-sm font-medium text-gray-700">Travel Time</label>
+                    <label htmlFor="travel-time" className="block text-sm font-medium text-gray-300">Travel Time</label>
                     <input
                       type="time"
                       id="travel-time"
-                      className="p-2 border border-gray-300 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-100"
+                      className="p-2 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
                       value={time}
                       onChange={e => setTime(e.target.value)}
                     />
@@ -233,7 +233,7 @@ const AddressInput = () => {
                   <button
                     onClick={handleLocationSubmit}
                     disabled={submitting}
-                    className="px-5 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:bg-gray-300"
+                    className="px-5 py-3 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg hover:from-purple-600 hover:to-indigo-700 disabled:bg-gray-400"
                   >
                     {submitting ? 'Submitting...' : 'Add Trip'}
                   </button>
@@ -244,10 +244,10 @@ const AddressInput = () => {
         </AnimatePresence>
       </div>
       {carpoolData.length > 0 && (
-      <div className="mt-10 w-full flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-700">Search Results</h2>
+      <div className=" w-full flex justify-between items-center">
+        <h2 className="text-2xl font-bold text-gray-300">Search Results</h2>
         <select
-          className="p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+          className="p-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
           value={filterOption}
           onChange={(e) => setFilterOption(e.target.value)}
         >
@@ -259,7 +259,7 @@ const AddressInput = () => {
       </div>
     )}
 
-    <div className="prompt_layout flex flex-wrap gap-4 w-full">  {/* Adjusted for better layout handling */}
+    <div className="prompt_layout grid grid-cols-1 mx-auto w-full">  {/* Adjusted for better layout handling */}
       {carpoolData.map((post) => (
         <PromptCard
           key={post._id}

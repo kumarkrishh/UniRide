@@ -5,9 +5,8 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
-import { FiCalendar, FiClock } from 'react-icons/fi'; // Importing date and time icons
-import { FaCar, FaHandshake, FaRoute } from 'react-icons/fa'; // Importing rideshare icons
-
+import { FiCalendar, FiClock, FiMessageCircle } from 'react-icons/fi';
+import { FaCar } from 'react-icons/fa';
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
@@ -15,13 +14,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const router = useRouter();
 
   const [requestSent, setRequestSent] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(false);
 
   const handleButtonClick = async () => {
     if (!requestSent) {
       try {
         session.user.chatwithid = post.userId._id;
-    session.user.chatwithname = post.userId.username;
-    session.user.chatwithimage = post.userId.image;
+        session.user.chatwithname = post.userId.username;
+        session.user.chatwithimage = post.userId.image;
         const notificationMessage = `${session?.user.name} has requested a rideshare with you.`;
         const encodedChatWithImage = encodeURIComponent(session.user.chatwithimage);
         await axios.post(`/api/addnotif/${session.user.chatwithid}/${session.user.id}/${notificationMessage}/${session.user.chatwithname}/${encodedChatWithImage}`);
@@ -48,7 +48,6 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     if (parts.length >= 3) {
       const street = `${parts[0]}, ${parts[1]}`;
       const city = parts[2];
-      // Check if the city part does not contain a 2-letter state code
       if (!/^[A-Z]{2}$/.test(city.split(' ')[0])) {
         return `${street}, ${city}`;
       }
@@ -70,27 +69,36 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   };
 
   return (
-    <div className="shadow-lg p-6 rounded-lg bg-white w-3/4 max-w-4xl">
+    <div className={`shadow-lg p-6 rounded-lg bg-[#1e2a38] text-white w-full max-w-4xl ${pathName === "/my-trips" ? "prompt_card" : ""}`}>
       <div className="flex items-center justify-between mb-4">
-        <div className="flex items-center gap-3">
+        <div className="relative flex items-center gap-3 group" onClick={() => {
+          router.push("/viewuserprofile");
+        }}>
           <Image 
             src={post.userId.image}
             alt="user_image"
             width={40}
             height={40}
-            className="rounded-full object-contain"
+            className="rounded-full object-contain cursor-pointer"
           />
           <div>
-            <p className="text-gray-700 font-semibold">{post.userId.username}</p>
-            <p className="text-gray-500 text-sm">{post.userId.email}</p>
+            <p className="text-white font-semibold cursor-pointer group-hover:underline">{post.userId.username}</p>
+            <p className="text-gray-300 text-sm cursor-pointer group-hover:underline">{post.userId.email}</p>
           </div>
+          {showTooltip && (
+            <div className="absolute top-12 left-0 bg-gray-700 text-white p-3 rounded-lg shadow-lg z-10">
+              <p className="text-sm font-semibold">{post.userId.username}</p>
+              <p className="text-xs">{post.userId.email}</p>
+            </div>
+          )}
         </div>
         <div className="flex items-center gap-3">
           <button
-            className="text-red-500 hover:text-red-600"
+            className="text-white hover:text-gray-300 relative"
             onClick={() => handlemsgClick(post)}
           >
-            <img src="/assets/images/msgicon.svg" alt="Message" width={30} height={30} />
+            <div className="absolute inset-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 opacity-50" style={{ top: '-5px', left: '-6px' }}></div>
+            <FiMessageCircle size={28} className="relative z-10" />
           </button>
           {session?.user.id === post.userId._id && pathName === "/my-trips" && (
             <>
@@ -111,38 +119,63 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         </div>
       </div>
       <div className="mb-4">
-        <div className="flex items-center text-gray-700 mb-1">
+        <div className="flex items-center text-gray-300 mb-1">
           <FiCalendar className="mr-2" />
           <span>{formatDate(post.date)}</span>
           <FiClock className="ml-4 mr-2" />
           <span>{formatTime(post.time)}</span>
         </div>
-        <p className="text-gray-700 mb-1">
+        <p className="text-gray-300 mb-1">
           <span className="font-semibold">From: </span>{extractStreetAndCity(post.startAddress.address)}
         </p>
-        <p className="text-gray-700 mb-1">
+        <p className="text-gray-300 mb-1">
           <span className="font-semibold">To: </span>{extractStreetAndCity(post.destinationAddress.address)}
         </p>
       </div>
-      <p className="font-medium text-gray-800 mb-4">
+      <p className="text-white mb-4">
         {post.prompt}
       </p>
       {post.tag && (
-        <p className="mt-2 text-sm text-blue-600 cursor-pointer" onClick={() => handleTagClick && handleTagClick(post.tag)}>
+        <p className="mt-2 text-blue-400 cursor-pointer" onClick={() => handleTagClick && handleTagClick(post.tag)}>
           #{post.tag}
         </p>
       )}
       {pathName === "/create-prompt" && (
         <div className="flex items-center mt-4">
           <button
-            className={`px-4 py-2 text-sm text-white rounded flex items-center gap-2 ${requestSent ? 'bg-gray-400' : 'bg-green-500 hover:bg-green-600'}`}
+            className={`request-button ${requestSent ? 'bg-gray-400' : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700'}`}
             onClick={handleButtonClick}
           >
-            <FaCar />
+            <FaCar className="mr-2" />
             {requestSent ? 'Request Sent' : 'Request Rideshare'}
           </button>
         </div>
       )}
+      <style jsx>{`
+        .request-button {
+          display: inline-flex;
+          align-items: center;
+          padding: 12px 24px;
+          font-size: 16px;
+          font-weight: 600;
+          color: #fff;
+          background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+          border: none;
+          border-radius: 50px;
+          transition: background 0.3s ease, transform 0.2s ease;
+          cursor: pointer;
+        }
+
+        .request-button:hover {
+          background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+          transform: translateY(-2px);
+        }
+
+        .request-button:focus {
+          outline: none;
+          box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
+        }
+      `}</style>
     </div>
   );
 }

@@ -16,7 +16,7 @@ const RootLayout = ({ children }) => (
           <div className='white' />
         </div>
 
-        <main className='app'>
+        <main className='app bg-[#141d26]'>
           <Nav />
           {children}
         </main>
