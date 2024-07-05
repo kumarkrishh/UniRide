@@ -24,7 +24,7 @@ const Nav = () => {
   return (
     <div className='w-full flex justify-center py-3'>
       <nav className='flex-between w-full max-w-6xl rounded-full px-6 py-3 bg-[#2d3748] shadow-lg'>
-        <Link href='/' className='flex gap-2 flex-center px-3'>
+        <Link href='/' className='flex gap-2 flex-center px-3 mb-1'>
           <Image
             src='/assets/images/logo4.png'
             alt='logo'

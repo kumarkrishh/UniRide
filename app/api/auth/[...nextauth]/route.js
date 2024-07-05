@@ -19,6 +19,7 @@ const handler = NextAuth({
       session.user.chatwithid = "";
       session.user.chatwithname = "";
       session.user.chatwithimage = "";
+      session.user.viewuserid = "";
       
       return session;
     },

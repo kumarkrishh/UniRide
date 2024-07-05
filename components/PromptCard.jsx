@@ -7,6 +7,8 @@ import { usePathname, useRouter } from 'next/navigation';
 import axios from 'axios';
 import { FiCalendar, FiClock, FiMessageCircle } from 'react-icons/fi';
 import { FaCar } from 'react-icons/fa';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
@@ -14,7 +16,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const router = useRouter();
 
   const [requestSent, setRequestSent] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const handleButtonClick = async () => {
     if (!requestSent) {
@@ -23,7 +25,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         session.user.chatwithname = post.userId.username;
         session.user.chatwithimage = post.userId.image;
         const notificationMessage = `${session?.user.name} has requested a rideshare with you.`;
-        const encodedChatWithImage = encodeURIComponent(session.user.chatwithimage);
+        const encodedChatWithImage = encodeURIComponent(session.user.image);
         await axios.post(`/api/addnotif/${session.user.chatwithid}/${session.user.id}/${notificationMessage}/${session.user.chatwithname}/${encodedChatWithImage}`);
 
         setRequestSent(true);
@@ -41,6 +43,13 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     session.user.chatwithname = post.userId.username;
     session.user.chatwithimage = post.userId.image;
     router.push(`/req-rideshare`);
+  };
+
+  const handleDeleteClick = () => {
+    setIsDeleting(true);
+    setTimeout(() => {
+      handleDelete(post);
+    }, 500); // Duration of the animation
   };
 
   const extractStreetAndCity = (address) => {
@@ -69,11 +78,15 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   };
 
   return (
-    <div className={`shadow-lg p-6 rounded-lg bg-[#1e2a38] text-white w-full max-w-4xl ${pathName === "/my-trips" ? "prompt_card" : ""}`}>
+    <div 
+      className={`shadow-lg p-6 rounded-lg bg-[#1e2a38] text-white w-full max-w-4xl ${isDeleting ? 'deleting' : ''}`}
+      style={{ breakInside: 'avoid' }}
+    >
       <div className="flex items-center justify-between mb-4">
         <div className="relative flex items-center gap-3 group" onClick={() => {
+          session.user.viewuserid = post.userId._id;
           router.push("/viewuserprofile");
-        }}>
+          }}>
           <Image 
             src={post.userId.image}
             alt="user_image"
@@ -85,34 +98,24 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             <p className="text-white font-semibold cursor-pointer group-hover:underline">{post.userId.username}</p>
             <p className="text-gray-300 text-sm cursor-pointer group-hover:underline">{post.userId.email}</p>
           </div>
-          {showTooltip && (
-            <div className="absolute top-12 left-0 bg-gray-700 text-white p-3 rounded-lg shadow-lg z-10">
-              <p className="text-sm font-semibold">{post.userId.username}</p>
-              <p className="text-xs">{post.userId.email}</p>
-            </div>
-          )}
         </div>
         <div className="flex items-center gap-3">
-          <button
-            className="text-white hover:text-gray-300 relative"
-            onClick={() => handlemsgClick(post)}
-          >
-            <div className="absolute inset-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 opacity-50" style={{ top: '-5px', left: '-6px' }}></div>
-            <FiMessageCircle size={28} className="relative z-10" />
-          </button>
+          {pathName === "/create-prompt" && (
+            <button
+              className="text-white hover:text-gray-300 relative"
+              onClick={() => handlemsgClick(post)}
+            >
+              <div className="absolute inset-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 opacity-50" style={{ top: '-5px', left: '-6px' }}></div>
+              <FiMessageCircle size={28} className="relative z-10" />
+            </button>
+          )}
           {session?.user.id === post.userId._id && pathName === "/my-trips" && (
             <>
               <button 
-                className="px-4 py-2 text-sm text-white bg-blue-500 rounded hover:bg-blue-600"
-                onClick={() => handleEdit(post)}
+                className="text-white hover:text-gray-300 relative"
+                onClick={handleDeleteClick}
               >
-                Edit
-              </button>
-              <button 
-                className="px-4 py-2 text-sm text-white bg-red-500 rounded hover:bg-red-600"
-                onClick={() => handleDelete(post)}
-              >
-                Delete
+                <DeleteIcon style={{ fontSize: 28 }} />
               </button>
             </>
           )}
@@ -174,6 +177,21 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
         .request-button:focus {
           outline: none;
           box-shadow: 0 0 0 3px rgba(66, 153, 225, 0.6);
+        }
+
+        .deleting {
+          animation: fadeOut 0.5s forwards;
+        }
+
+        @keyframes fadeOut {
+          from {
+            opacity: 1;
+            transform: scale(1);
+          }
+          to {
+            opacity: 0;
+            transform: scale(0.8);
+          }
         }
       `}</style>
     </div>
