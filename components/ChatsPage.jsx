@@ -5,9 +5,10 @@ import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelHeader, MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
 import { useSession } from 'next-auth/react';
 import 'stream-chat-react/dist/css/index.css';
+import Box from '@mui/material/Box';
+import CircularProgress from '@mui/material/CircularProgress';
 
-
-const ChatsPage = ({ otherUserId }) => {
+const ChatsPage = () => {
   const [client, setClient] = useState(null);
   const [channels, setChannels] = useState([]);
   const [activeChannel, setActiveChannel] = useState(null);
@@ -70,9 +71,22 @@ const ChatsPage = ({ otherUserId }) => {
         console.log("User disconnected successfully");
       }*/
     };
-  }, [session, otherUserId]);
+  }, [session]);
 
-  if (!client) return <div>Setting up client & connection...</div>;
+  if (!client) {
+    return (
+      <Box sx={{
+        backgroundColor: '#141d26',
+        minHeight: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 3,
+      }}>
+        <CircularProgress sx={{ color: 'white' }} />
+      </Box>
+    );
+  }
 
   return (
     <div className='str-chat'>

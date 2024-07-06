@@ -130,7 +130,7 @@ const AddressInput = () => {
   };
 
   return (
-    <div className="flex flex-col w-full max-w-xl mx-auto my-4 p-4 rounded-lg  text-white">
+    <div className="flex flex-col w-full max-w-xl mx-auto mb-2 p-4 rounded-lg text-white">
       <div className="items-center mb-8">
         <AnimatePresence>
           {step === 1 && (
@@ -142,15 +142,15 @@ const AddressInput = () => {
               transition={{ duration: 0.5 }}
               className="relative w-full mb-4"
             >
-              <div className="relative w-full mb-4">
+              <div className="relative w-full mb-6">
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                   className="relative w-full mb-4"
                 >
-                  <div className="relative w-full mb-4">
-                    <label htmlFor="location-input" className="block text-sm font-medium text-gray-300">Start Address</label>
+                  <div className="relative w-full mb-6">
+                    <label htmlFor="location-input" className="block text-sm font-medium text-gray-300 mb-2">Start Address</label>
                     <input
                       type="text"
                       id="location-input"
@@ -174,15 +174,15 @@ const AddressInput = () => {
               transition={{ duration: 0.5 }}
               className="relative w-full mb-4"
             >
-              <div className="relative w-full mb-4">
+              <div className="relative w-full mb-6">
                 <motion.div
                   initial={{ opacity: 0, y: -10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.3 }}
                   className="relative w-full mb-4"
                 >
-                  <div className="relative w-full mb-4">
-                    <label htmlFor="destination-input" className="block text-sm font-medium text-gray-300">End Address</label>
+                  <div className="relative w-full mb-6">
+                    <label htmlFor="destination-input" className="block text-sm font-medium text-gray-300 mb-2">End Address</label>
                     <input
                       type="text"
                       id="destination-input"
@@ -206,10 +206,10 @@ const AddressInput = () => {
               transition={{ duration: 0.5 }}
               className="relative w-full mb-4"
             >
-              <div className="relative w-full mb-4">
-                <div className="flex gap-4 mb-4">
+              <div className="relative w-full mb-6">
+                <div className="flex gap-4 mb-6">
                   <div className="flex flex-col flex-1">
-                    <label htmlFor="travel-date" className="block text-sm font-medium text-gray-300">Travel Date</label>
+                    <label htmlFor="travel-date" className="block text-sm font-medium text-gray-300 mb-2">Travel Date</label>
                     <input
                       type="date"
                       id="travel-date"
@@ -219,7 +219,7 @@ const AddressInput = () => {
                     />
                   </div>
                   <div className="flex flex-col flex-1">
-                    <label htmlFor="travel-time" className="block text-sm font-medium text-gray-300">Travel Time</label>
+                    <label htmlFor="travel-time" className="block text-sm font-medium text-gray-300 mb-2">Travel Time</label>
                     <input
                       type="time"
                       id="travel-time"
@@ -244,31 +244,31 @@ const AddressInput = () => {
         </AnimatePresence>
       </div>
       {carpoolData.length > 0 && (
-      <div className=" w-full flex justify-between items-center">
-        <h2 className="text-2xl font-bold text-gray-300">Search Results</h2>
-        <select
-          className="p-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
-          value={filterOption}
-          onChange={(e) => setFilterOption(e.target.value)}
-        >
-          <option value="">Select Filter</option>
-          <option value="option1">Option 1</option>
-          <option value="option2">Option 2</option>
-          <option value="option3">Option 3</option>
-        </select>
-      </div>
-    )}
+        <div className=" w-full flex justify-between items-center">
+          <h2 className="text-2xl font-bold text-gray-300">Search Results</h2>
+          <select
+            className="p-2 border border-gray-600 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
+            value={filterOption}
+            onChange={(e) => setFilterOption(e.target.value)}
+          >
+            <option value="">Select Filter</option>
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+          </select>
+        </div>
+      )}
 
-    <div className="prompt_layout grid grid-cols-1 mx-auto w-full">  {/* Adjusted for better layout handling */}
-      {carpoolData.map((post) => (
-        <PromptCard
-          key={post._id}
-          post={post}
-          handleEdit={() => handleEdit && handleEdit(post)}
-          handleDelete={() => handleDelete && handleDelete(post)}
-        />
-      ))}
-    </div>
+      <div className="prompt_layout grid grid-cols-1 mx-auto w-full">  {/* Adjusted for better layout handling */}
+        {carpoolData.map((post) => (
+          <PromptCard
+            key={post._id}
+            post={post}
+            handleEdit={() => handleEdit && handleEdit(post)}
+            handleDelete={() => handleDelete && handleDelete(post)}
+          />
+        ))}
+      </div>
     </div>
   );
 };

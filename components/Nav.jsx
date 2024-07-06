@@ -23,10 +23,10 @@ const Nav = () => {
 
   return (
     <div className='w-full flex justify-center py-3'>
-      <nav className='flex-between w-full max-w-6xl rounded-full px-6 py-3 bg-[#2d3748] shadow-lg'>
-        <Link href='/' className='flex gap-2 flex-center px-3 mb-1'>
+      <nav className='flex-between w-full max-w-6xl rounded-full px-6 mt-2 py-3 bg-[#2d3748] shadow-lg'>
+        <Link href='/' className='flex gap-2 flex-center mt-1'>
           <Image
-            src='/assets/images/logo4.png'
+            src='/assets/images/logo5.png'
             alt='logo'
             width={125}
             height={30}
@@ -60,7 +60,7 @@ const Nav = () => {
                   src={sessionStatus.session.user.image}
                   width={37}
                   height={37}
-                  className='rounded-full border border-black'
+                  className='rounded-full border border-white transition-transform duration-300 hover:scale-110'
                   alt='profile'
                 />
               </Link>

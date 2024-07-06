@@ -17,7 +17,7 @@ const ridesharereq = (request, {params}) => {
 
   return (
     <div className='background '>
-      <ChatsPage otheruserId={session?.user.chatwithid} />
+      <ChatsPage/>
       
     </div>
     
