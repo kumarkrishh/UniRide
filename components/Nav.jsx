@@ -22,7 +22,7 @@ const Nav = () => {
   }, [session, status]);
 
   return (
-    <div className='w-full flex justify-center py-3'>
+    <div className='w-full flex justify-center mb-0 z-10'>
       <nav className='flex-between w-full max-w-6xl rounded-full px-6 mt-2 py-3 bg-[#2d3748] shadow-lg'>
         <Link href='/' className='flex gap-2 flex-center mt-1'>
           <Image

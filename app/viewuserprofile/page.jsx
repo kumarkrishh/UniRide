@@ -71,12 +71,11 @@ const UserProfile = () => {
 
   return (
     <Box sx={{
-      backgroundColor: '#141d26',
-      minHeight: '100vh',
+      
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-      padding: 3,
+      marginTop: 5,
     }}>
       <Container maxWidth="md">
         <Paper elevation={3} sx={{

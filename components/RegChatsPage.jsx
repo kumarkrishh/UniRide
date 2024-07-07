@@ -75,8 +75,10 @@ const RegChatsPage = ({ otherUserId }) => {
   }
 
   return (
+    
+<div className="rounded-lg bg-black" style={{ height: "calc(100vh - 100px)", overflow: 'hidden' }}>
     <div className='str-chat'>
-      <Chat client={client}>
+      <Chat client={client} theme="messaging dark">
         <ChannelList
           filters={{ type: 'messaging', members: { $in: [session.user.id] } }}
           sort={{ last_message_at: -1 }}
@@ -109,8 +111,8 @@ const RegChatsPage = ({ otherUserId }) => {
             <Channel channel={activeChannel}>
               <Window>
                 <ChannelHeader />
-                <MessageList />
-                <MessageInput />
+                <MessageList className="bg-black"/>
+                <MessageInput  />
               </Window>
               <Thread />
             </Channel>
@@ -118,30 +120,32 @@ const RegChatsPage = ({ otherUserId }) => {
         </div>
       </Chat>
       <style jsx>{`
+      
         .str-chat {
           display: flex;
-          height: 100vh;
         }
         .channel-list {
           width: 30%;  /* Updated to take up 40% of the screen */
-          border-right: 1px solid #ddd;
+          border-right: 2px solid #ddd;
           padding: 10px;
           overflow-y: auto;
+          
         }
         .channel-messages {
           width: 70%;  /* Updated to take up the remaining 60% */
           display: flex;
           flex-direction: column;
+          height: calc(100vh - 100px);
+
         }
         .channel-preview__container {
           padding: 10px;
           border-radius: 4px;
-          background-color: #f0f0f0;
           margin-bottom: 8px;
           cursor: pointer;
         }
-        .channel-preview__container:hover, .channel-preview__container.selected {
-          background-color: #e0e0e0;
+        .channel-preview__container.selected {
+          background-color: #b3b3b3;
         }
         .channel-preview__content-wrapper {
           display: flex;
@@ -164,6 +168,7 @@ const RegChatsPage = ({ otherUserId }) => {
           color: #666;
         }
       `}</style>
+    </div>
     </div>
   );
 };
