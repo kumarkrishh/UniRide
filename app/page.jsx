@@ -14,10 +14,10 @@ const Home = () => {
            style={{ height: '100vh', width: '100vw', opacity: '0.3' }} />
       <div className="relative z-10 p-10 flex flex-col justify-center items-center" style={{ height: '100vh' }}>
         <h1 className="text-6xl font-bold mb-6" style={{marginTop: '-250px'}}>Connect & Commute</h1>
-        <p className="text-2xl max-w-5xl text-center">
-        Expand your college experience with BruinRide, your go-to carpool network. Whether it's a ride to campus, a weekend escape, or a trip to the city, connect with fellow students and travel smarter together.
+        <p className="text-2xl max-w-4xl text-center mt-6">
+        Expand your college experience with UniRide, your go-to carpool network. Whether it's a ride to campus, a weekend escape, or a trip to the city, connect with fellow students and travel smarter together.
         </p>
-        <button className="mt-6 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg">
+        <button className="mt-10 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg">
           Get Started
         </button>
       </div>
@@ -37,8 +37,8 @@ const Home = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <img src="/assets/images/form1.png" alt="Fill Form" style={{ height: '350px' }} className="shadow-xl rounded-lg"/>
-        <div className="text-left max-w-md ml-8 mr-10">
+        <img src="/assets/images/form1.png" alt="Fill Form" style={{ height: '350px' }} className=" rounded-lg"/>
+        <div className="text-left max-w-md ml-8 mr-10" style={{marginTop: '-100px'}}>
           <span className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600">Find</span>
           <p className="mt-5 text-xl leading-relaxed tracking-wide">Fill out a simple form to tell us your travel details and preferences. Our system is designed to connect you with other students who share similar routes and schedules, making every commute efficient and environmentally friendly.</p>
         </div>
@@ -51,8 +51,8 @@ const Home = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <img src="/assets/images/results1.png" alt="View Matches" style={{ height: '270px' }} className="shadow-xl rounded-lg"/>
-        <div className="text-left max-w-md mr-20">
+        <img src="/assets/images/results1.png" alt="View Matches" style={{ height: '270px' }} className="rounded-lg"/>
+        <div className="text-left max-w-md mr-20" style={{marginTop: '-50px'}}>
           <span className="text-left text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600">Request</span>
           <p className="mt-5 text-xl leading-relaxed tracking-wide">See a list of potential ride matches based on your route and schedule. Our platform ensures that all matches are verified students for safety and reliability.</p>
         </div>
@@ -65,8 +65,8 @@ const Home = () => {
         viewport={{ once: true }}
         transition={{ duration: 0.5 }}
       >
-        <img src="/assets/images/chatpic.png" alt="Message" style={{ height: '300px' }} className="shadow-xl rounded-lg"/>
-        <div className="text-left max-w-md ml-8 mr-8">
+        <img src="/assets/images/chatpic.png" alt="Message" style={{ height: '300px' }} className=" rounded-lg"/>
+        <div className="text-left max-w-md ml-8 mr-8" style={{marginTop: '-50px'}}>
           <span className="text-left text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600">Connect</span>
           <p className="mt-5 text-xl leading-relaxed tracking-wide">Use our built-in messaging system to connect with your matches. Arrange specifics like pickup points, times, and shared costs directly through the platform. Commuting together not only saves you money but also reduces your carbon footprint.</p>
         </div>
@@ -78,7 +78,7 @@ const Home = () => {
     
 
     {/* Call to Action Section */}
-    <section className="cta text-center my-12 bg-gray-900 text-white py-10 rounded-lg shadow-xl">
+    <section className="cta text-center my-12 bg-gray-800 text-white py-10 shadow-xl">
       <h2 className="text-4xl font-bold">Ready to Reduce Your Travel Costs?</h2>
       <p className="text-2xl my-4">Sign up today and start connecting with fellow students on your route.</p>
       <button className="mt-4 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg">

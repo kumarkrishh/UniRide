@@ -76,7 +76,7 @@ const RegChatsPage = ({ otherUserId }) => {
 
   return (
     
-<div className="rounded-lg bg-black" style={{ height: "calc(100vh - 100px)", overflow: 'hidden' }}>
+<div className="rounded-lg bg-black" style={{ height: "calc(100vh - 100px)", marginTop: '20px', overflow: 'hidden' }}>
     <div className='str-chat'>
       <Chat client={client} theme="messaging dark">
         <ChannelList
