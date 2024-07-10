@@ -2,12 +2,54 @@
 
 import React from 'react';
 import { motion, useAnimation } from 'framer-motion';
+import { useRef, useEffect, useState } from 'react';
+import PromptCard from '@components/PromptCard';
 
 const Home = () => {
   const controls = useAnimation();
+  const [carpoolData, setCarpoolData] = useState([]);
+  const scrollRef = useRef(null);
+
+  const scrollLeft = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
+
+  const scrollRight = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
+
+  const fetchCarpoolData = async () => {
+    const response = await fetch('/api/findcarpools/drivers', {
+      method: 'GET', // Changed to GET as we're not sending any data
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      console.log(data);
+      setCarpoolData(data);
+      
+    } else {
+      console.error('Failed to fetch carpool data');
+    }
+  };
+
+  useEffect(() => {
+    fetchCarpoolData();
+  }, []);
+
+  const cardWidth = 400;  // Fixed width for each card
+  const cardHeight = 200; // Fixed height for each card
 
   return (
   <div className="w-full z-0" style={{ marginTop: '-70px' }}>
+    
     {/* Hero Section */}
     <section className="relative text-white overflow-hidden">
       <img className="w-full absolute inset-0" src="/assets/images/hero1final.png" alt="Campus View"
@@ -22,6 +64,48 @@ const Home = () => {
         </button>
       </div>
     </section>
+
+   
+    <div className="relative my-4 mx-auto px-4 max-w-full">
+        <h2 className="text-2xl text-white font-bold mb-4">Available Rides</h2>
+        <button className="absolute left-0 z-10 text-white bg-blue-500 hover:bg-blue-700 rounded-full p-2" onClick={scrollLeft} style={{ top: '50%', transform: 'translateY(-10%)', marginLeft: '10px' }}>&lt;</button>
+        <div className="overflow-hidden" style={{ paddingLeft: '40px', paddingRight: '40px' }}>
+          <div className="flex overflow-x-auto py-4" ref={scrollRef}>
+            {carpoolData.map((post) => (
+              <div key={post._id} style={{ marginRight: "10px", width: `${cardWidth}px`, minHeight: '400px', maxHeight: `400px`, flex: '0 0 auto' }}>
+                <PromptCard post={post}/>
+              </div>
+            ))}
+          </div>
+        </div>
+        <button className="absolute right-0 z-10 text-white bg-blue-500 hover:bg-blue-700 rounded-full p-2" onClick={scrollRight} style={{ top: '50%', transform: 'translateY(-10%)', marginRight: '10px' }}>&gt;</button>
+      </div>
+
+      <style jsx>{`
+        .overflow-hidden .flex {
+          -ms-overflow-style: none; /* IE and Edge */
+          scrollbar-width: none; /* Firefox */
+        }
+
+        .overflow-hidden .flex::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, Opera */
+        }
+        button {
+          background: #333;
+          color: white;
+          border: none;
+          padding: 10px;
+          cursor: pointer;
+          opacity: 0.6;
+          transition: opacity 0.3s;
+        }
+        button:hover {
+          opacity: 1;
+        }
+      `}</style>
+    
+
+      
 
     {/* How It Works Section */}
     
@@ -91,3 +175,14 @@ const Home = () => {
 
 
 export default Home;
+
+
+
+
+
+
+
+
+
+
+

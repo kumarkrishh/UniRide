@@ -3,7 +3,7 @@ import Location from "@models/location";
 import { connectToDB } from "@utils/database";
 
 export const POST = async (request) => {
-    const { startAddress, destinationAddress, userId, date, time, userName } = await request.json();
+    const { startAddress, destinationAddress, userId, date, time, userName, rideType } = await request.json();
 
     try {
         await connectToDB();
@@ -27,7 +27,8 @@ export const POST = async (request) => {
                 }
             },
             date: date,
-            time: time
+            time: time,
+            rideType: rideType,
         });
 
         await newLocation.save(); // Save the new location to the database

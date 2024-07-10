@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import PromptCard from "./PromptCard";
 import { motion, AnimatePresence } from 'framer-motion';
+import InfoIcon from '@mui/icons-material/Info';
+import Tooltip from '@mui/material/Tooltip';
 
 const AddressInput = () => {
   const [location, setLocation] = useState('');
@@ -18,6 +20,7 @@ const AddressInput = () => {
   const [carpoolData, setCarpoolData] = useState([]);
   const [filterOption, setFilterOption] = useState('');
   const [showFilters, setShowFilters] = useState(false);
+  const [role, setRole] = useState('driver');
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -72,6 +75,10 @@ const AddressInput = () => {
     initAutocomplete();
   }, []);
 
+  const handleRoleChange = (newRole) => {
+    setRole(newRole);
+  };
+
   const handleLocationSubmit = async () => {
     if (!session) {
       alert("You must be logged in to save locations.");
@@ -97,6 +104,7 @@ const AddressInput = () => {
           },
           date: date,
           time: time,
+          rideType: role,
         }),
       });
 
@@ -133,7 +141,6 @@ const AddressInput = () => {
     <div className="flex flex-col w-full max-w-xl mx-auto mb-2 p-4 rounded-lg text-white">
       <div className="items-center mb-8">
         <AnimatePresence>
-          {step === 1 && (
             <motion.div
               key="step1"
               initial={{ opacity: 0, x: -100 }}
@@ -150,7 +157,7 @@ const AddressInput = () => {
                   className="relative w-full mb-4"
                 >
                   <div className="relative w-full mb-6">
-                    <label htmlFor="location-input" className="block text-sm font-medium text-gray-300 mb-2">Start Address</label>
+                    <label htmlFor="location-input" className="block text-m font-medium text-gray-300 mb-2">Start Address</label>
                     <input
                       type="text"
                       id="location-input"
@@ -163,9 +170,7 @@ const AddressInput = () => {
                 </motion.div>
               </div>
             </motion.div>
-          )}
 
-          {step === 1 && (
             <motion.div
               key="step3"
               initial={{ opacity: 0, x: -100 }}
@@ -181,8 +186,8 @@ const AddressInput = () => {
                   transition={{ duration: 0.3 }}
                   className="relative w-full mb-4"
                 >
-                  <div className="relative w-full mb-6">
-                    <label htmlFor="destination-input" className="block text-sm font-medium text-gray-300 mb-2">End Address</label>
+                  <div className="relative w-full">
+                    <label htmlFor="destination-input" className="block text-m font-medium text-gray-300 mb-2">End Address</label>
                     <input
                       type="text"
                       id="destination-input"
@@ -195,20 +200,17 @@ const AddressInput = () => {
                 </motion.div>
               </div>
             </motion.div>
-          )}
 
-          {step === 1 && (
             <motion.div
-              key="step5"
+              key="step4"
               initial={{ opacity: 0, x: -100 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 100 }}
               transition={{ duration: 0.5 }}
               className="relative w-full mb-4"
             >
-              <div className="relative w-full mb-6">
-                <div className="flex gap-4 mb-6">
-                  <div className="flex flex-col flex-1">
+            <div className="flex gap-4 mb-6">
+            <div className="flex flex-col flex-1">
                     <label htmlFor="travel-date" className="block text-sm font-medium text-gray-300 mb-2">Travel Date</label>
                     <input
                       type="date"
@@ -228,19 +230,80 @@ const AddressInput = () => {
                       onChange={e => setTime(e.target.value)}
                     />
                   </div>
+                  </div>
+                  </motion.div>
+                
+            {step === 1 && (
+            <motion.div
+              key="step5"
+              initial={{ opacity: 0, x: -100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.5 }}
+              className="relative w-full mb-4"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <div>
+
+                  <h2 className='text-m font-medium text-gray-300 mb-2'>Select Role</h2>
+                  
+                  <div className="role-buttons">
+                    <button
+                      className={`role-button ${role === 'driver' ? 'active' : ''}`}
+                      onClick={() => handleRoleChange('driver')}
+                    >
+                      Driver
+                    </button>
+                    <button
+                      className={`role-button ${role === 'rider' ? 'active' : ''}`}
+                      onClick={() => handleRoleChange('rider')}
+                    >
+                      Rider
+                    </button>
+                  </div>
                 </div>
-                <div className="flex justify-end mt-4">
-                  <button
-                    onClick={handleLocationSubmit}
-                    disabled={submitting}
-                    className="px-5 py-3 bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-lg hover:from-purple-600 hover:to-indigo-700 disabled:bg-gray-400"
-                  >
-                    {submitting ? 'Submitting...' : 'Add Trip'}
-                  </button>
-                </div>
+                <button
+                  onClick={handleLocationSubmit}
+                  disabled={submitting}
+                  className="mt-7 px-5 py-3 font-bold bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md hover:from-purple-600 hover:to-indigo-700 disabled:bg-gray-400"
+                >
+                  {submitting ? 'Submitting...' : 'Submit'}
+                </button>
               </div>
+
+              <style jsx>{`
+                .role-buttons {
+                  display: flex;
+                  gap: 10px;
+                  margin-right: 20px; /* Ensures spacing between buttons and the submit button */
+                }
+                .role-button, .submit-button {
+                  padding: 10px 20px;
+                  background-color: #4A5568;
+                  color: #E2E8F0;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  font-size: 16px;
+                  transition: all 0.3s ease;
+                  outline: none;
+                }
+                .role-button.active {
+                  background-color: #3182CE;
+                  color: #FFFFFF;
+                  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+                }
+                .submit-button {
+                  background-color: #2B6CB0; /* Distinct color for submit button */
+                  color: #FFFFFF;
+                  font-weight: bold;
+                  hover: background-color: #3182CE;
+                }
+              `} </style>
             </motion.div>
-          )}
+                      )}
+
+                  
         </AnimatePresence>
       </div>
       {carpoolData.length > 0 && (

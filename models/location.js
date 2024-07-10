@@ -20,7 +20,8 @@ const locationSchema = new Schema({
     }
   },
   date: String,  
-  time: String
+  time: String,
+  rideType: String,
 });
 
 const Location = models.Location || model('Location', locationSchema);
