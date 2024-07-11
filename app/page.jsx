@@ -4,48 +4,20 @@ import React from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { useRef, useEffect, useState } from 'react';
 import PromptCard from '@components/PromptCard';
+import { useRouter } from "next/navigation";
+import { signIn, signOut, useSession, getProviders } from "next-auth/react";
 
 const Home = () => {
   const controls = useAnimation();
-  const [carpoolData, setCarpoolData] = useState([]);
-  const scrollRef = useRef(null);
-
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
-    }
-  };
-
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
-    }
-  };
-
-  const fetchCarpoolData = async () => {
-    const response = await fetch('/api/findcarpools/drivers', {
-      method: 'GET', // Changed to GET as we're not sending any data
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log(data);
-      setCarpoolData(data);
-      
-    } else {
-      console.error('Failed to fetch carpool data');
-    }
-  };
+  const router = useRouter();
+  const [providers, setProviders] = useState(null);
 
   useEffect(() => {
-    fetchCarpoolData();
+    (async () => {
+      const res = await getProviders();
+      setProviders(res);
+    })();
   }, []);
-
-  const cardWidth = 400;  // Fixed width for each card
-  const cardHeight = 200; // Fixed height for each card
 
   return (
   <div className="w-full z-0" style={{ marginTop: '-70px' }}>
@@ -59,53 +31,11 @@ const Home = () => {
         <p className="text-2xl max-w-4xl text-center mt-6">
         Expand your college experience with UniRide, your go-to carpool network. Whether it's a ride to campus, a weekend escape, or a trip to the city, connect with fellow students and travel smarter together.
         </p>
-        <button className="mt-10 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg">
+        <button className="mt-10 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg" onClick={() => {router.push("/available-rideshares")}}>
           Get Started
         </button>
       </div>
     </section>
-
-   
-    <div className="relative my-4 mx-auto px-4 max-w-full">
-        <h2 className="text-2xl text-white font-bold mb-4">Available Rides</h2>
-        <button className="absolute left-0 z-10 text-white bg-blue-500 hover:bg-blue-700 rounded-full p-2" onClick={scrollLeft} style={{ top: '50%', transform: 'translateY(-10%)', marginLeft: '10px' }}>&lt;</button>
-        <div className="overflow-hidden" style={{ paddingLeft: '40px', paddingRight: '40px' }}>
-          <div className="flex overflow-x-auto py-4" ref={scrollRef}>
-            {carpoolData.map((post) => (
-              <div key={post._id} style={{ marginRight: "10px", width: `${cardWidth}px`, minHeight: '400px', maxHeight: `400px`, flex: '0 0 auto' }}>
-                <PromptCard post={post}/>
-              </div>
-            ))}
-          </div>
-        </div>
-        <button className="absolute right-0 z-10 text-white bg-blue-500 hover:bg-blue-700 rounded-full p-2" onClick={scrollRight} style={{ top: '50%', transform: 'translateY(-10%)', marginRight: '10px' }}>&gt;</button>
-      </div>
-
-      <style jsx>{`
-        .overflow-hidden .flex {
-          -ms-overflow-style: none; /* IE and Edge */
-          scrollbar-width: none; /* Firefox */
-        }
-
-        .overflow-hidden .flex::-webkit-scrollbar {
-          display: none; /* Chrome, Safari, Opera */
-        }
-        button {
-          background: #333;
-          color: white;
-          border: none;
-          padding: 10px;
-          cursor: pointer;
-          opacity: 0.6;
-          transition: opacity 0.3s;
-        }
-        button:hover {
-          opacity: 1;
-        }
-      `}</style>
-    
-
-      
 
     {/* How It Works Section */}
     
@@ -165,7 +95,11 @@ const Home = () => {
     <section className="cta text-center my-12 bg-gray-800 text-white py-10 shadow-xl">
       <h2 className="text-4xl font-bold">Ready to Reduce Your Travel Costs?</h2>
       <p className="text-2xl my-4">Sign up today and start connecting with fellow students on your route.</p>
-      <button className="mt-4 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg">
+      <button className="mt-4 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg" onClick={() => {
+        if (providers)
+          Object.values(providers).map((provider) => {signIn(provider.id)})
+      
+      }}>
         Join Now
       </button>
     </section>

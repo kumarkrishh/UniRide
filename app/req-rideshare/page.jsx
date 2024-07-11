@@ -16,7 +16,7 @@ const ridesharereq = (request, {params}) => {
   
 
   return (
-    <div className='background '>
+    <div className='background w-3/4'>
       <ChatsPage/>
       
     </div>

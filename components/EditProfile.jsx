@@ -58,7 +58,7 @@ const EditProfile = () => {
       });
       if (response.ok) {
         setShowMessage(true);
-        setTimeout(() => setShowMessage(false), 3000); // Hide the message after 3 seconds
+        setTimeout(() => setShowMessage(false), 1000); // Hide the message after 3 seconds
       } else {
         console.error("Failed to update profile");
       }

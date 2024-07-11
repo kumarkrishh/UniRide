@@ -51,7 +51,7 @@ const MyProfile = () => {
   return (
     <Profile
       name='My Trips'
-      desc='Welcome to your personalized profile page. Share your exceptional prompts and inspire others with the power of your imagination'
+      desc='Welcome to your dashboard for viewing and managing all your rideshare requests.'
       data={myPosts}
       handleEdit={handleEdit}
       handleDelete={handleDelete}

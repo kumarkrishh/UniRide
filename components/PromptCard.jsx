@@ -100,7 +100,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          {pathName === "/create-prompt" && (
+          {(pathName === "/create-prompt" || pathName === "/available-rideshares") && (
             <button
               className="text-white hover:text-gray-300 relative"
               onClick={() => handlemsgClick(post)}
@@ -143,7 +143,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           #{post.tag}
         </p>
       )}
-      {pathName === "/create-prompt" && (
+      {(pathName === "/create-prompt" || pathName === "/available-rideshares") && (
         <div className="flex items-center mt-4">
           <button
             className={`request-button ${requestSent ? 'bg-gray-400' : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700'}`}

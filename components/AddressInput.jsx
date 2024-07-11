@@ -21,6 +21,9 @@ const AddressInput = () => {
   const [filterOption, setFilterOption] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [role, setRole] = useState('driver');
+  const [tripSubmitted, setTripSubmitted] = useState(false);
+
+
 
   useEffect(() => {
     const loadGoogleMapsScript = () => {
@@ -127,6 +130,8 @@ const AddressInput = () => {
         const carpooldata = await fetchResponse.json();
         console.log(carpooldata);
         setCarpoolData(carpooldata);
+        setTripSubmitted(true);
+        setTimeout(() => setTripSubmitted(false), 1000);
       } else {
         throw new Error('Failed to save location');
       }
@@ -306,6 +311,20 @@ const AddressInput = () => {
                   
         </AnimatePresence>
       </div>
+
+      {/* Display a message if no carpool data is found */}
+      {carpoolData.length === 0 && !submitting && (
+  <div className="text-center p-4  rounded-md text-white text-2xl text-gray-300 "
+      >
+    Currently, there are no matches for your search criteria. Please adjust your filters or try again later.
+  </div>
+)}
+
+
+
+
+
+
       {carpoolData.length > 0 && (
         <div className=" w-full flex justify-between items-center">
           <h2 className="text-2xl font-bold text-gray-300">Search Results</h2>
