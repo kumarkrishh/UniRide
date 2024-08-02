@@ -29,7 +29,10 @@ const Home = () => {
           <p className="text-2xl max-w-4xl text-center mt-6">
             Expand your college experience with UniRide, your go-to carpool network. Whether it's a ride to campus, a weekend escape, or a trip to the city, connect with fellow students and travel smarter together.
           </p>
-          <button className="mt-10 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg" onClick={() => { router.push("/available-rideshares") }}>
+          <button className="mt-10 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg" onClick={() => {
+          if (providers)
+            Object.values(providers).map((provider) => { signIn(provider.id) })
+        }}>
             Get Started
           </button>
         </div>
@@ -84,18 +87,6 @@ const Home = () => {
             </motion.div>
           </div>
         </div>
-      </section>
-
-      {/* Call to Action Section */}
-      <section className="cta text-center my-12 bg-gray-800 text-white py-10 shadow-xl">
-        <h2 className="text-4xl font-bold">Ready to Reduce Your Travel Costs?</h2>
-        <p className="text-2xl my-4">Sign up today and start connecting with fellow students on your route.</p>
-        <button className="mt-4 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg" onClick={() => {
-          if (providers)
-            Object.values(providers).map((provider) => { signIn(provider.id) })
-        }}>
-          Join Now
-        </button>
       </section>
     </div>
   );
