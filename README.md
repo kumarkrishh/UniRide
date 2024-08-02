@@ -64,7 +64,7 @@
 <<!-- ABOUT THE PROJECT -->
 ## About The Project
 
-<img src="/public/assets/images/githubscreenshot.png" alt="UniRide Screen Shot" style="transform: scale(0.5) skewX(-10deg); width: auto; height: auto;">
+<img src="/public/assets/images/githubscreenshot.png" alt="UniRide Screen Shot" style="width: auto; height: 80%;">
 ![UniRide Screen Shot][product-screenshot]
 
 Welcome to **UniRide**, the carpooling platform tailored for college students. UniRide makes it easy to share rides with fellow students, helping you cut down on travel costs and get to places like the airport without breaking the bank.
