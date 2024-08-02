@@ -64,14 +64,20 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![UniRide Screen Shot][product-screenshot]](https://example.com)
 
-BruinRide is a platform designed to enhance your college experience by connecting students for carpooling. Whether it's a ride to campus, a weekend trip, or a city excursion, BruinRide helps you travel smarter together.
+Welcome to **UniRide**, a dynamic carpooling platform tailored specifically for college students. UniRide is more than just a ride-sharing app—it's a community-driven service designed to make your college journey more connected and sustainable.
 
-Key Features:
-* Simplified ride-sharing for college students.
-* Environmentally friendly by reducing carbon footprint.
-* Cost-effective travel solution.
+### Why Choose UniRide?
+UniRide offers a unique set of features designed to enhance your travel experience and foster a sense of community among students:
+
+- **Simplified Carpooling**: Easily connect with fellow students traveling in the same direction. Our intuitive platform takes the hassle out of organizing rides, whether it’s daily commutes or occasional trips.
+- **Eco-Friendly**: By sharing rides, you contribute to reducing carbon emissions, helping to create a greener, more sustainable environment.
+- **Cost-Effective**: Save money on travel costs by splitting expenses with peers. UniRide helps make transportation more affordable for every student.
+- **Safe and Secure**: Trust and safety are our top priorities. UniRide implements robust verification processes to ensure that all members of our community are current students, making every journey safe and secure.
+
+Join UniRide today and start sharing your journey with fellow students, making each trip economical, eco-friendly, and enjoyable!
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
