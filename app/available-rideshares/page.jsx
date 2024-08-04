@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import PromptCard from '@components/PromptCard';
 import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 const Page = () => {
     const [drivercarpoolData, setDriverCarpoolData] = useState([]);
     const router = useRouter();
+    const { data: session } = useSession();
     const fetchCarpoolData = async () => {
-        const response = await fetch('/api/findcarpools/drivers', {
+        const response = await fetch(`/api/findcarpools/drivers/${session.user.id}`, {
           method: 'GET', // Changed to GET as we're not sending any data
           headers: {
             'Content-Type': 'application/json',

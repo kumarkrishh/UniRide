@@ -1,7 +1,7 @@
 import Location from "@models/location";
 import { connectToDB } from "@utils/database";
 
-export const GET = async (request) => {
+export const GET = async (req, {params}) => {
     console.log("reached new route");
     try {
         await connectToDB();
@@ -10,7 +10,8 @@ export const GET = async (request) => {
 
         const trips = await Location.find({
             rideType: 'driver',
-            date: { $gt: currentDate } // Filtering for dates after today
+            date: { $gt: currentDate }, // Filtering for dates after today
+            userId: { $ne: params.id }
         }).populate('userId');
 
         return new Response(JSON.stringify(trips), { status: 200 });
