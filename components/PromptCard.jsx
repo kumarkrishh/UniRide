@@ -73,8 +73,10 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
   // Format date to a readable format
   const formatDate = (date) => {
+    const localDate = new Date(date);
+    localDate.setMinutes(localDate.getMinutes() + localDate.getTimezoneOffset());
     const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    return new Date(date).toLocaleDateString(undefined, options);
+    return localDate.toLocaleDateString(undefined, options);
   };
 
   // Format time to a readable format

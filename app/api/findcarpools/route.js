@@ -35,7 +35,7 @@ export const POST = async (request) => {
             userId: { $ne: userId }
             
         }).populate('userId');
-        console.log(coordinates.lat, coordinates.lng);
+        console.log(trips);
 
         return new Response(JSON.stringify(trips), { status: 200 });
     } catch (error) {
