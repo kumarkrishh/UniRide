@@ -5,7 +5,7 @@ import Provider from "@components/Provider";
 
 export const metadata = {
   title: "UniRide",
-  description: "Discover & Share AI Prompts",
+  description: "Connect & Share Rides with Fellow Students.",
 };
 
 const RootLayout = ({ children }) => (
