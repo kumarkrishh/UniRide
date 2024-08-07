@@ -11,6 +11,7 @@ const Home = () => {
   const controls = useAnimation();
   const router = useRouter();
   const [providers, setProviders] = useState(null);
+  const { data: session } = useSession();
 
   useEffect(() => {
     (async () => {
@@ -18,6 +19,20 @@ const Home = () => {
       setProviders(res);
     })();
   }, []);
+
+  const handleGetStarted = () => {
+    if (session) {
+      // If the user is logged in, route to the desired page
+      router.push('/available-rideshares'); // Change '/dashboard' to the desired page
+    } else {
+      // If the user is not logged in, proceed with the normal sign-in process
+      if (providers) {
+        Object.values(providers).forEach((provider) => {
+          signIn(provider.id);
+        });
+      }
+    }
+  };
 
   return (
     <div className="w-full z-0" style={{ marginTop: '-70px' }}>
@@ -29,10 +44,8 @@ const Home = () => {
           <p className="text-2xl max-w-4xl text-center mt-6">
             Expand your college experience with UniRide, your go-to carpool network. Whether it's a ride to campus, a weekend escape, or a trip to the city, connect with fellow students and travel smarter together.
           </p>
-          <button className="mt-10 bg-blue-600 hover:bg-blue-800 text-white font-bold py-3 px-6 rounded-lg text-lg" onClick={() => {
-          if (providers)
-            Object.values(providers).map((provider) => { signIn(provider.id) })
-        }}>
+          <button className="mt-10 bg-gradient-to-r from-blue-600 to-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg transform transition-all duration-300 ease-in-out text-lg hover:scale-105"
+   onClick={handleGetStarted}>
             Get Started
           </button>
         </div>

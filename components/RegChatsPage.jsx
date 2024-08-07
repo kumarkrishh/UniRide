@@ -18,6 +18,7 @@ const RegChatsPage = ({ otherUserId }) => {
     if (!session || !session.user || !session.user.id) {
       console.log("Session or user data is not available.");
       return;
+    
     }
 
     const initChat = async () => {
@@ -111,6 +112,7 @@ const RegChatsPage = ({ otherUserId }) => {
                 </div>
               </div>
             )}
+            
           />
           <div className="channel-messages">
             {activeChannel && (
@@ -126,51 +128,56 @@ const RegChatsPage = ({ otherUserId }) => {
           </div>
         </Chat>
         <style jsx>{`
-          .str-chat {
-            display: flex;
-          }
-          .channel-list {
-            width: 30%;  /* Updated to take up 30% of the screen */
-            border-right: 2px solid #ddd;
-            padding: 10px;
-            overflow-y: auto;
-          }
-          .channel-messages {
-            width: 70%;  /* Updated to take up the remaining 70% */
-            display: flex;
-            flex-direction: column;
-            height: calc(100vh - 100px);
-          }
-          .channel-preview__container {
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 8px;
-            cursor: pointer;
-          }
-          .channel-preview__container.selected {
-            background-color: #b3b3b3;
-          }
-          .channel-preview__content-wrapper {
-            display: flex;
-            flex-direction: column;
-          }
-          .channel-preview__content-top {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 4px;
-          }
-          .channel-preview__content-name {
-            font-weight: bold;
-          }
-          .channel-preview__content-time {
-            font-size: 0.75rem;
-            color: #333;
-          }
-          .channel-preview__content-message {
-            font-size: 0.875rem;
-            color: #666;
-          }
-        `}</style>
+  .str-chat {
+    display: flex;
+    background-color: #1c262f; /* New background for the chat container */
+  }
+  .str-chat .channel-list {
+    width: 30%;  /* Updated to take up 30% of the screen */
+    border-right: 2px solid #ddd;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #1f2a36 !important; /* New background for the channel list */
+  }
+  .str-chat .channel-messages {
+    width: 70%;  /* Updated to take up the remaining 70% */
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 100px);
+    background-color: #141d26 !important; /* New background for the messages portion */
+  }
+  .str-chat .channel-preview__container {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    background-color: #2b3a47;
+  }
+  .str-chat .channel-preview__container.selected {
+    background-color: #3c5567;
+  }
+  .channel-preview__content-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+  .channel-preview__content-top {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 4px;
+  }
+  .channel-preview__content-name {
+    font-weight: bold;
+  }
+  .channel-preview__content-time {
+    font-size: 0.75rem;
+    color: white;
+  }
+  .channel-preview__content-message {
+    font-size: 0.875rem;
+    color: white;
+  }
+`}</style>
+
       </div>
     </div>
   );

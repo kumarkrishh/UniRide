@@ -12,7 +12,8 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Divider from '@mui/material/Divider';
 import Logout from '@mui/icons-material/Logout';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
+import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 import { useRouter } from "next/navigation";
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
@@ -88,20 +89,15 @@ const Nav = () => {
           {sessionStatus.session?.user ? (
             <div className='flex gap-3 md:gap-5'>
 
-              
-              <Link href='/chatlist' className='black_btn'>
-                Messages
-              </Link>
-              <Link href='/my-trips' className='black_btn'>
-                My Trips
-              </Link>
               <Link href='/create-prompt' className='black_btn'>
                 Find RideShares
               </Link>
               <Link href='/available-rideshares' className='black_btn'>
                 Available RideShares
               </Link>
-
+              <Link href='/my-trips' className='black_btn'>
+                My Trips
+              </Link>
 
               <ThemeProvider theme={theme}>
               <Box sx={{ display: 'flex', alignItems: 'center', cursor: 'pointer' }} onClick={handleMenuClick}>
@@ -138,12 +134,21 @@ const Nav = () => {
                   </ListItemIcon>
                   Profile
                 </MenuItem>
+
+                <MenuItem onClick={() => {router.push("/chatlist")}}>
+                  <ListItemIcon>
+                    <EmailOutlinedIcon fontSize="small" />
+                  </ListItemIcon>
+                  Messages
+                </MenuItem>
+
                 <MenuItem onClick={() => {router.push("/mynotifications")}}>
                   <ListItemIcon>
-                    <NotificationsIcon fontSize="small" />
+                    <NotificationsNoneOutlinedIcon fontSize="small" />
                   </ListItemIcon>
                   Notifications
                 </MenuItem>
+                
                 <Divider sx={{ borderColor: '#ffffff' }}/>
                 
                 <MenuItem onClick={ signOut }>
