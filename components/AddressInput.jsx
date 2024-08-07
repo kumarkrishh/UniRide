@@ -95,7 +95,6 @@ const AddressInput = () => {
     }
     if (!location || !destination || !date || !time || !coordinates.lat || !destinationCoordinates.lat) {
       setErrorMessage('Please fill out all fields before submitting.');
-      setTimeout(() => setErrorMessage(''), 1500);
       return;
     }
     setErrorMessage('');
