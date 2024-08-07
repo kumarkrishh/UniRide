@@ -75,7 +75,7 @@ const EditProfile = () => {
 
   return (
     <div className="max-w-2xl mx-auto p-8 bg-gray-800 shadow-xl rounded-2xl text-gray-200 mt-5">
-      <h2 className="text-3xl font-bold mb-8 text-gray-100">Edit Profile</h2>
+      <h2 className="text-3xl font-bold mb-8 text-gray-100">My Profile</h2>
       <form onSubmit={handleSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
           <div>

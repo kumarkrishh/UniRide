@@ -23,6 +23,7 @@ const AddressInput = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [role, setRole] = useState('driver');
   const [tripSubmitted, setTripSubmitted] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
   // Load Google Maps script and initialize autocomplete
   useEffect(() => {
@@ -135,7 +136,9 @@ const AddressInput = () => {
         console.log(carpooldata);
         setCarpoolData(carpooldata);
         setTripSubmitted(true);
-        
+        setShowSuccessMessage(true);
+        //setTimeout(() => setTripSubmitted(false), 7000);
+        setTimeout(() => setShowSuccessMessage(false), 3000);
       } else {
         throw new Error('Failed to save location');
       }
@@ -315,7 +318,7 @@ const AddressInput = () => {
       {/* Display a message if no carpool data is found */}
       {carpoolData.length === 0 && tripSubmitted && (
         <div className="text-center p-4 rounded-md text-white text-2xl text-gray-300">
-          Currently, there are no matches for your search criteria. Please adjust your filters or try again later.
+          Currently, there are no rideshares for your search criteria.
         </div>
       )}
 
@@ -335,7 +338,16 @@ const AddressInput = () => {
           />
         ))}
       </div>
+
+      {showSuccessMessage && (
+        <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-xl transition-transform transform-gpu ease-in-out duration-300">
+          Trip added successfully!
+        </div>
+      )}
+
     </div>
+
+    
   );
 };
 

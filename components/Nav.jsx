@@ -57,6 +57,13 @@ const Nav = () => {
     })();
   }, []);
 
+  useEffect(() => {
+    if (status === "authenticated") {
+      // Redirect to the desired page after sign-in
+      router.push('/available-rideshares'); // Change this to your desired redirect page
+    }
+  }, [status]);
+
   const sessionStatus = useMemo(() => {
     return { session, status };
   }, [session, status]);
@@ -69,6 +76,10 @@ const Nav = () => {
   const handleClose = () => {
     setAnchorEl(null);
     setIsMenuOpen(false);
+  };
+
+  const handleSignOut = () => {
+    signOut({ callbackUrl: '/' }); // Redirect to the home page after sign-out
   };
 
   return (
@@ -97,6 +108,9 @@ const Nav = () => {
               </Link>
               <Link href='/my-trips' className='black_btn'>
                 My Trips
+              </Link>
+              <Link href='/chatlist' className='black_btn'>
+                Messages
               </Link>
 
               <ThemeProvider theme={theme}>
@@ -135,13 +149,6 @@ const Nav = () => {
                   Profile
                 </MenuItem>
 
-                <MenuItem onClick={() => {router.push("/chatlist")}}>
-                  <ListItemIcon>
-                    <EmailOutlinedIcon fontSize="small" />
-                  </ListItemIcon>
-                  Messages
-                </MenuItem>
-
                 <MenuItem onClick={() => {router.push("/mynotifications")}}>
                   <ListItemIcon>
                     <NotificationsNoneOutlinedIcon fontSize="small" />
@@ -151,7 +158,7 @@ const Nav = () => {
                 
                 <Divider sx={{ borderColor: '#ffffff' }}/>
                 
-                <MenuItem onClick={ signOut }>
+                <MenuItem onClick={ handleSignOut }>
                   <ListItemIcon>
                     <Logout fontSize="small"  />
                   </ListItemIcon>
