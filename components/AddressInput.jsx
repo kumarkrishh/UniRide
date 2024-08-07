@@ -24,6 +24,7 @@ const AddressInput = () => {
   const [role, setRole] = useState('driver');
   const [tripSubmitted, setTripSubmitted] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   // Load Google Maps script and initialize autocomplete
   useEffect(() => {
@@ -92,6 +93,12 @@ const AddressInput = () => {
       alert("You must be logged in to save locations.");
       return;
     }
+    if (!location || !destination || !date || !time || !coordinates.lat || !destinationCoordinates.lat) {
+      setErrorMessage('Please fill out all fields before submitting.');
+      setTimeout(() => setErrorMessage(''), 1500);
+      return;
+    }
+    setErrorMessage('');
     setSubmitting(true);
     try {
       const response = await fetch('/api/locations/new', {
@@ -151,6 +158,15 @@ const AddressInput = () => {
 
   return (
     <div className="flex flex-col w-full max-w-xl mx-auto mb-2 p-4 rounded-lg text-white">
+      
+      {errorMessage && (
+  <div className={`mb-4 text-red-600 text-lg font-semibold transition-opacity duration-1000 ease-in-out ${!errorMessage ? 'opacity-0 max-h-0' : 'opacity-100'}`}>
+    {errorMessage}
+  </div>
+)}
+
+
+
       <div className="items-center mb-8">
         <AnimatePresence>
           <motion.div
