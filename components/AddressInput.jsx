@@ -25,6 +25,9 @@ const AddressInput = () => {
   const [tripSubmitted, setTripSubmitted] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  
+  const currentDateTime = new Date();
+  const currentDate = currentDateTime.toLocaleDateString('en-CA'); // Get date in YYYY-MM-DD format
 
   // Load Google Maps script and initialize autocomplete
   useEffect(() => {
@@ -245,6 +248,7 @@ const AddressInput = () => {
                   className="p-2 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
                   value={date}
                   onChange={e => setDate(e.target.value)}
+                  min={currentDate}
                 />
               </div>
               <div className="flex flex-col flex-1">
