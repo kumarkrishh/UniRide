@@ -1,17 +1,22 @@
 import Location from "@models/location";
 import { connectToDB } from "@utils/database";
 
-export const GET = async (req, {params}) => {
+export const GET = async (req, { params }) => {
     console.log("reached new route");
     try {
         await connectToDB();
 
-        const currentDate = new Date().toISOString().split('T')[0]; // Get the current date in YYYY-MM-DD format
+        // Get the current date and time in the user's local timezone
+        const currentDateTime = new Date();
+        const currentDate = currentDateTime.toLocaleDateString('en-CA'); // Get date in YYYY-MM-DD format
+        const currentTime = currentDateTime.toLocaleTimeString('en-GB', { hour12: false }); // Get time in HH:MM:SS format
 
         const trips = await Location.find({
             rideType: 'driver',
-            date: { $gt: currentDate }, // Filtering for dates after today
-            userId: { $ne: params.id }
+            $or: [
+                { date: { $gt: currentDate } }, // Dates after today
+                { date: currentDate, time: { $gte: currentTime } } // If today, check for time greater or equal
+            ]
         }).populate('userId');
 
         return new Response(JSON.stringify(trips), { status: 200 });

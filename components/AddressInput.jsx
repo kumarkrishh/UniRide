@@ -270,27 +270,10 @@ const AddressInput = () => {
               className="relative w-full mb-4"
             >
               <div className="flex justify-between items-center mb-6">
-                <div>
-                  <h2 className='text-m font-medium text-gray-300 mb-2'>Select Role</h2>
-                  <div className="role-buttons">
-                    <button
-                      className={`role-button ${role === 'driver' ? 'active' : ''}`}
-                      onClick={() => handleRoleChange('driver')}
-                    >
-                      Driver
-                    </button>
-                    <button
-                      className={`role-button ${role === 'rider' ? 'active' : ''}`}
-                      onClick={() => handleRoleChange('rider')}
-                    >
-                      Rider
-                    </button>
-                  </div>
-                </div>
                 <button
                   onClick={handleLocationSubmit}
                   disabled={submitting}
-                  className="mt-7 px-5 py-3 font-bold bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md hover:from-purple-600 hover:to-indigo-700 disabled:bg-gray-400"
+                  className="mt-2 px-5 py-3 font-bold bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md hover:from-purple-600 hover:to-indigo-700 disabled:bg-gray-400"
                 >
                   {submitting ? 'Submitting...' : 'Submit'}
                 </button>

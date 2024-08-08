@@ -43,6 +43,8 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
   // Handle the message button click
   const handlemsgClick = async () => {
+    if (post.userId._id == session.user.id)
+      return;
     session.user.chatwithid = post.userId._id;
     session.user.chatwithname = post.userId.username;
     session.user.chatwithimage = post.userId.image;
@@ -109,7 +111,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           </div>
         </div>
         <div className="flex items-center gap-3">
-          {(pathName === "/create-prompt" || pathName === "/available-rideshares") && (
+          {((pathName === "/create-prompt" || pathName === "/available-rideshares") && session?.user.id !== post.userId._id) && (
             <button
               className="text-white hover:text-gray-300 relative"
               onClick={() => handlemsgClick(post)}
