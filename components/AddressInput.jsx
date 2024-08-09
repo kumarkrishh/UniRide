@@ -4,8 +4,9 @@ import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import PromptCard from "./PromptCard";
 import { motion, AnimatePresence } from 'framer-motion';
-import InfoIcon from '@mui/icons-material/Info';
-import Tooltip from '@mui/material/Tooltip';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 const AddressInput = () => {
   // State variables to manage inputs, coordinates, form submission, etc.
@@ -27,7 +28,11 @@ const AddressInput = () => {
   const [errorMessage, setErrorMessage] = useState('');
   
   const currentDateTime = new Date();
-  const currentDate = currentDateTime.toLocaleDateString('en-CA'); // Get date in YYYY-MM-DD format
+  const currentTime = new Date().toLocaleTimeString('en-GB', { 
+    hour: '2-digit', 
+    minute: '2-digit', 
+    hour12: false 
+  });
 
   // Load Google Maps script and initialize autocomplete
   useEffect(() => {
@@ -240,28 +245,47 @@ const AddressInput = () => {
             className="relative w-full mb-4"
           >
             <div className="flex gap-4 mb-6">
-              <div className="flex flex-col flex-1">
+            <div className="flex flex-col flex-1">
                 <label htmlFor="travel-date" className="block text-sm font-medium text-gray-300 mb-2">Travel Date</label>
-                <input
-                  type="date"
+                <DatePicker
+                  selected={date}
+                  onChange={(date) => setDate(date)}
+                  className=" p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white w-full"
+                  placeholderText="Select a date"
                   id="travel-date"
-                  className="p-2 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
-                  value={date}
-                  onChange={e => setDate(e.target.value)}
-                  min={currentDate}
+                  minDate={new Date()}
                 />
               </div>
               <div className="flex flex-col flex-1">
-                <label htmlFor="travel-time" className="block text-sm font-medium text-gray-300 mb-2">Travel Time</label>
+                <label htmlFor="travel-time" className="mt-0.5block text-sm font-medium text-gray-300 mb-2">Travel Time</label>
                 <input
                   type="time"
                   id="travel-time"
-                  className="p-2 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
-                  value={time}
+                  className="p-2.5 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
+                  value={time || "--:--"} // Use "--:--" as the default display value
                   onChange={e => setTime(e.target.value)}
+                  onFocus={e => e.target.showPicker()} // Show picker when the input gains focus
                 />
               </div>
             </div>
+            <style jsx>{`
+              /* Hide the native time picker icon for WebKit browsers (Chrome, Safari) */
+              input[type="time"]::-webkit-calendar-picker-indicator {
+                display: none;
+                -webkit-appearance: none;
+              }
+
+              /* Hide the native time picker icon for Firefox */
+              input[type="time"]::-moz-focus-inner {
+                border: 0;
+              }
+
+              /* Hide the native time picker icon for Internet Explorer */
+              input[type="time"]::-ms-clear {
+                display: none;
+              }
+            `}
+            </style>
           </motion.div>
 
           {step === 1 && (

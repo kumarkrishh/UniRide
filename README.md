@@ -14,6 +14,8 @@
 
   <p align="center">
     Your go-to carpool network for college students!
+    <br />
+    <a href="https://bruin-ride-wl7n-git-main-krishkumars-projects.vercel.app/" target="_blank">Live Website</a>
   </p>
 </div>
 
