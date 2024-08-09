@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 
 import Profile from "@components/Profile";
 
+
 const MyProfile = () => {
   const router = useRouter(); // Initialize router for navigation
   const { data: session } = useSession(); // Get session data from next-auth

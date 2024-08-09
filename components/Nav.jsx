@@ -101,7 +101,7 @@ const Nav = () => {
             <div className='flex gap-3 md:gap-5'>
 
               <Link href='/create-prompt' className='black_btn'>
-                Find RideShares
+                Create RideShares
               </Link>
               <Link href='/available-rideshares' className='black_btn'>
                 Available RideShares
