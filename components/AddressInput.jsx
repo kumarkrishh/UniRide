@@ -153,6 +153,13 @@ const AddressInput = () => {
         setShowSuccessMessage(true);
         //setTimeout(() => setTripSubmitted(false), 7000);
         setTimeout(() => setShowSuccessMessage(false), 3000);
+
+        // Clear form fields
+        setLocation('');
+        setDestination('');
+        setDate(null);
+        setTime('');
+        
       } else {
         throw new Error('Failed to save location');
       }
@@ -341,18 +348,32 @@ const AddressInput = () => {
         </AnimatePresence>
       </div>
 
-      {/* Display a message if no carpool data is found */}
-      {carpoolData.length === 0 && tripSubmitted && (
-        <div className="text-center p-4 rounded-md text-white text-2xl text-gray-300">
-          Currently, there are no rideshares for your search criteria.
-        </div>
-      )}
+      <AnimatePresence>
+  {showSuccessMessage && (
+    <motion.div
+      initial={{ opacity: 0, y: -10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -10 }}
+      className="flex items-center justify-center mt-6"
+    >
+      <div className="text-2xl font-semibold text-gray-200 shadow-lg transform transition-all duration-300 ease-in-out">
+        <span className="block">🎉 Trip added successfully! 🎉</span>
+      </div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
-      {carpoolData.length > 0 && (
-        <div className="w-full flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-300">Search Results</h2>
-        </div>
-      )}
+
+
+
+
+      {/* 
+        {carpoolData.length > 0 && (
+          <div className="w-full flex justify-between items-center">
+            <h2 className="text-2xl font-bold text-gray-300">Search Results</h2>
+          </div>
+        )}
+      */}
 
       <div className="prompt_layout grid grid-cols-1 mx-auto w-full">
         {carpoolData.map((post) => (
@@ -364,12 +385,6 @@ const AddressInput = () => {
           />
         ))}
       </div>
-
-      {showSuccessMessage && (
-        <div className="fixed bottom-4 right-4 p-4 bg-green-500 text-white rounded-lg shadow-xl transition-transform transform-gpu ease-in-out duration-300">
-          Trip added successfully!
-        </div>
-      )}
 
     </div>
 

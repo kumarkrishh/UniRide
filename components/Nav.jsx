@@ -100,11 +100,11 @@ const Nav = () => {
           {sessionStatus.session?.user ? (
             <div className='flex gap-3 md:gap-5'>
 
+              <Link href='/available-rideshares' className='black_btn'>
+                Find RideShares
+              </Link>
               <Link href='/create-prompt' className='black_btn'>
                 Create RideShares
-              </Link>
-              <Link href='/available-rideshares' className='black_btn'>
-                Available RideShares
               </Link>
               <Link href='/my-trips' className='black_btn'>
                 My Trips
