@@ -82,7 +82,7 @@ const Nav = () => {
     signOut({ callbackUrl: '/' }); // Redirect to the home page after sign-out
   };
 
-  if (!session && status === "loading") {
+  if (status === "loading") {
     return <div>Loading...</div>; // Shows loading state
   }
   
