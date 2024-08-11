@@ -86,7 +86,7 @@ const Page = () => {
           const date2String = new Date(selectedDate).toDateString();
 
           return (
-            post.destinationAddress.address.includes(searchQuery) && 
+            (!searchQuery || post.destinationAddress.address.includes(searchQuery)) && 
             (!selectedDate || date1String === date2String) // Check if dates match or if no date filter is applied
         );
 }) 
