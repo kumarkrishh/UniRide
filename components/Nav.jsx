@@ -58,7 +58,7 @@ const Nav = () => {
   }, []);
 
   useEffect(() => {
-    if (session?.user) { //original: status === "authenticated"
+    if (status === "authenticated") {
       // Redirect to the desired page after sign-in
       router.push('/available-rideshares'); // Change this to your desired redirect page
     }
@@ -81,6 +81,11 @@ const Nav = () => {
   const handleSignOut = () => {
     signOut({ callbackUrl: '/' }); // Redirect to the home page after sign-out
   };
+
+  if (!session && status === "loading") {
+    return <div>Loading...</div>; // Shows loading state
+  }
+  
 
   return (
     <div className='w-full flex justify-center mb-0 z-10'>
