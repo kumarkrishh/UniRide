@@ -82,6 +82,13 @@ const Nav = () => {
     signOut({ callbackUrl: '/' }); // Redirect to the home page after sign-out
   };
 
+  const handleSignIn = async (providerId) => {
+    const res = await signIn(providerId);
+    if (res?.ok) {
+      window.location.reload(); // Forces a page reload after a successful sign-in
+    }
+  };
+
   return (
     <div className='w-full flex justify-center mb-0 z-10'>
       <nav className='flex-between w-full max-w-6xl rounded-full px-6 mt-2 py-3 bg-[#2d3748] shadow-lg'>
@@ -174,7 +181,7 @@ const Nav = () => {
                   <button
                     type='button'
                     key={provider.name}
-                    onClick={() => signIn(provider.id)}
+                    onClick={() => handleSignIn(provider.id)}
                     className='black_btn'
                   >
                     Sign in
