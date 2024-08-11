@@ -58,7 +58,7 @@ const Nav = () => {
   }, []);
 
   useEffect(() => {
-    if (status === "authenticated") {
+    if (session?.user) { //original: status === "authenticated"
       // Redirect to the desired page after sign-in
       router.push('/available-rideshares'); // Change this to your desired redirect page
     }
