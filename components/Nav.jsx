@@ -97,7 +97,7 @@ const Nav = () => {
 
         {/* Desktop Navigation */}
         <div className='sm:flex hidden'>
-          {sessionStatus.session?.user ? (
+          {session?.user ? ( //original sessionStatus.session?.user
             <div className='flex gap-3 md:gap-5'>
 
               <Link href='/available-rideshares' className='black_btn'>
