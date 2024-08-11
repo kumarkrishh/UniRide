@@ -154,7 +154,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
           #{post.tag}
         </p>
       )}
-      {(pathName === "/create-prompt" || pathName === "/available-rideshares") && (
+      {((pathName === "/create-prompt" || pathName === "/available-rideshares") && session?.user.id !== post.userId._id) && (
         <div className="flex items-center mt-4">
           <button
             className={`request-button ${requestSent ? 'bg-gray-400' : 'bg-gradient-to-r from-purple-500 to-indigo-600 hover:from-purple-600 hover:to-indigo-700'}`}

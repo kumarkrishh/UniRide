@@ -102,39 +102,39 @@ const Page = () => {
           <span className='bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600'>Find Rideshares</span>
         </h1>
         <p className="text-lg text-center mt-4">
-          Explore a variety of ride requests from our community members who are drivers looking for passengers. Find a match for your route and connect instantly!
+          Explore a variety of ride requests from our community. Find a match for your route and connect instantly!
         </p>
 
         {/* Search Filters */}
-<div className="flex justify-center items-center space-x-4 mt-6">
-  <input
-    type="text"
-    id="location-input"
-    placeholder="Search by destination"
-    className="flex-grow p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 placeholder-gray-400 text-white"
-    value={searchQuery}
-    onChange={e => setSearchQuery(e.target.value)}
-    style={{ flexBasis: '60%' }} // Larger space for location input
-  />
+        <div className="flex justify-center items-center space-x-4 mt-6">
+          <input
+            type="text"
+            id="location-input"
+            placeholder="Search by destination"
+            className="flex-grow p-3 border border-gray-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
+            value={searchQuery}
+            onChange={e => setSearchQuery(e.target.value)}
+            style={{ flexBasis: '60%' }} // Larger space for location input
+          />
 
-<div className="w-36"> {/* Wrapper div with fixed width */}
-    <DatePicker
-      selected={selectedDate}
-      onChange={(date) => setSelectedDate(date)}
-      className="w-full p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
-      placeholderText="Select a date"
-      minDate={new Date()}
-    />
-  </div>
+        <div className="w-36"> {/* Wrapper div with fixed width */}
+            <DatePicker
+              selected={selectedDate}
+              onChange={(date) => setSelectedDate(date)}
+              className="w-full p-3 border border-gray-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
+              placeholderText="Select date"
+              minDate={new Date()}
+            />
+          </div>
 
-  <button
-    onClick={handleSearchSubmit}
-    className="px-5 py-3 font-bold bg-gradient-to-r from-purple-500 to-indigo-600 text-white rounded-md hover:from-purple-600 hover:to-indigo-700 transition duration-300"
+          <button
+            onClick={handleSearchSubmit}
+            className="px-6 py-3 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg"
     style={{ flexBasis: '20%' }} // Same space as date picker for search button
-  >
-    Search
-  </button>
-</div>
+          >
+            Search
+          </button>
+        </div>
 
 
         {loading ? (
@@ -153,7 +153,9 @@ const Page = () => {
                 />
               ))
             ) : (
-              <p className="text-lg text-center mt-4">No matches found.</p>
+              <div className="text-center p-4 rounded-md text-white text-xl text-gray-300">
+          Currently, there are no rideshares for your search criteria.
+        </div>
             )}
           </div>
         )}

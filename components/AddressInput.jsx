@@ -204,7 +204,7 @@ const AddressInput = () => {
                     type="text"
                     id="location-input"
                     placeholder="Enter your starting address"
-                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 placeholder-gray-400 text-white"
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
                     value={location}
                     onChange={e => setLocation(e.target.value)}
                   />
@@ -234,7 +234,7 @@ const AddressInput = () => {
                     type="text"
                     id="destination-input"
                     placeholder="Enter your destination address"
-                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 placeholder-gray-400 text-white"
+                    className="w-full p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
                     value={destination}
                     onChange={e => setDestination(e.target.value)}
                   />
@@ -257,7 +257,7 @@ const AddressInput = () => {
                 <DatePicker
                   selected={date}
                   onChange={(date) => setDate(date)}
-                  className=" p-3 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white w-full"
+                  className=" p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 text-white w-full"
                   placeholderText="Select a date"
                   id="travel-date"
                   minDate={new Date()}
@@ -268,7 +268,7 @@ const AddressInput = () => {
                 <input
                   type="time"
                   id="travel-time"
-                  className="p-2.5 border border-gray-600 rounded-lg focus:ring-blue-500 focus:border-blue-500 bg-gray-700 text-white"
+                  className="p-2.5 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 text-white"
                   value={time || "--:--"} // Use "--:--" as the default display value
                   onChange={e => setTime(e.target.value)}
                   onFocus={e => e.target.showPicker()} // Show picker when the input gains focus
@@ -304,7 +304,7 @@ const AddressInput = () => {
               transition={{ duration: 0.5 }}
               className="relative w-full mb-4"
             >
-              <div className="flex justify-between items-center mb-6">
+              <div className="flex justify-end items-center mb-6">
                 <button
                   onClick={handleLocationSubmit}
                   disabled={submitting}
@@ -357,7 +357,7 @@ const AddressInput = () => {
       className="flex items-center justify-center mt-6"
     >
       <div className="text-2xl font-semibold text-gray-200 shadow-lg transform transition-all duration-300 ease-in-out">
-        <span className="block">🎉 Trip added successfully! 🎉</span>
+        <span className="block">Trip added successfully! 🎉</span>
       </div>
     </motion.div>
   )}
