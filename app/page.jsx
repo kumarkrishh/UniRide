@@ -38,7 +38,7 @@ const Home = () => {
   };
 
   return (
-    <div className="w-full z-0" style={{ marginTop: '-70px' }}>
+    <div className="w-full z-0" style={{ marginTop: '-75px' }}>
       {/* Hero Section */}
       <section className="relative text-white overflow-hidden">
         <img className="w-full h-auto absolute inset-0 object-contain" src="/assets/images/hero1final.png" alt="Campus View" style={{ opacity: '0.3' }} />
