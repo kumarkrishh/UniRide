@@ -84,7 +84,7 @@ const Nav = () => {
 
   return (
     <div className='w-full flex justify-center mb-0 z-10'>
-      <nav className='flex-between w-full max-w-6xl rounded-full px-6 mt-2 py-3 bg-[#2d3748] shadow-lg'>
+      <nav className='flex-between w-full max-w-6xl rounded-full px-6 mt-3 py-3 bg-[#2d3748] shadow-lg'>
         <Link href='/' className='flex gap-2 flex-center mt-1'>
           <Image
             src='/assets/images/logo5.png'
@@ -170,7 +170,7 @@ const Nav = () => {
           ) : (
             <>
             <div className='flex gap-3 md:gap-5'>
-              
+
               <Link href='/available-rideshares' className='black_btn'>
                   Find RideShares
               </Link>

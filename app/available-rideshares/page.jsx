@@ -76,18 +76,20 @@ const Page = () => {
 
     const filteredData = searchSubmitted 
         ? drivercarpoolData.filter(post => {
-          const date1 = new Date(post.date);
-        
-          // Increase date1 by one day (24 hours in milliseconds)
-          date1.setDate(date1.getDate() + 1);
-  
-          // Convert both dates to a comparable string format
-          const date1String = date1.toDateString();
-          const date2String = new Date(selectedDate).toDateString();
+          
+          //convert post date and search date to same timezone
+          const postdate = new Date(post.date);
+          postdate.setMinutes(postdate.getMinutes() + postdate.getTimezoneOffset());
+          const options = { year: 'numeric', month: 'long', day: 'numeric' };
+          const postdatestring = postdate.toLocaleDateString(undefined, options);
+
+          const searchdate = new Date(selectedDate);
+          searchdate.setMinutes(searchdate.getMinutes() + searchdate.getTimezoneOffset());
+          const searchdatestring = searchdate.toLocaleDateString(undefined, options);
 
           return (
             (!searchQuery || post.destinationAddress.address.includes(searchQuery)) && 
-            (!selectedDate || date1String === date2String) // Check if dates match or if no date filter is applied
+            (!selectedDate || postdatestring === searchdatestring) // Check if dates match or if no date filter is applied
         );
 }) 
         : drivercarpoolData;
