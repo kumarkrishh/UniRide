@@ -26,7 +26,7 @@ const handler = NextAuth({
     async signIn({ account, profile, user, credentials }) {
       try {
         await connectToDB();
-        
+        console.log('Database connected, checking user existence');
         const userExists = await User.findOne({ email: profile.email });
         
         if (!userExists) {
