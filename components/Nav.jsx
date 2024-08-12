@@ -176,13 +176,8 @@ const Nav = () => {
                     key={provider.name}
                     onClick={() => signIn(provider.id)}
                     className='black_btn'
-                    disabled={status === 'loading'}
                   >
-                    {status === 'loading' ? (
-                      <CircularProgress size={24} color="inherit" />
-                    ) : (
-                      'Sign in'
-                    )}
+                    Sign in
                   </button>
                 ))}
             </>
