@@ -82,11 +82,6 @@ const Nav = () => {
     signOut({ callbackUrl: '/' }); // Redirect to the home page after sign-out
   };
 
-  if (status === "loading") {
-    return <div>Loading...</div>; // Shows loading state
-  }
-  
-
   return (
     <div className='w-full flex justify-center mb-0 z-10'>
       <nav className='flex-between w-full max-w-6xl rounded-full px-6 mt-2 py-3 bg-[#2d3748] shadow-lg'>
