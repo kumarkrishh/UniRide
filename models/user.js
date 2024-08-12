@@ -22,6 +22,9 @@ const UserSchema = new Schema({
   },
   bio: {
     type: String
+  },
+  password: {
+    type: String
   }
 
 });

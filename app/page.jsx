@@ -21,9 +21,9 @@ const Home = () => {
   }, []);
 
   const handleGetStarted = () => {
-    if (session) {
+    /*if (session) {
       // If the user is logged in, route to the desired page
-      router.push('/available-rideshares'); // Change '/dashboard' to the desired page
+      router.push('/available-rideshares'); 
     } else {
       // If the user is not logged in, proceed with the normal sign-in process
       if (providers) {
@@ -31,7 +31,10 @@ const Home = () => {
           signIn(provider.id);
         });
       }
-    }
+    }*/
+
+      router.push('/available-rideshares'); 
+
   };
 
   return (

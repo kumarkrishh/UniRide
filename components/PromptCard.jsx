@@ -20,6 +20,11 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
   // Handle the request rideshare button click
   const handleButtonClick = async () => {
+    if (!session) {
+      alert('You must be signed in to request a rideshare.');
+      return;
+    }
+
     if (!requestSent) {
       try {
         // Set session details for chat
@@ -43,8 +48,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
   // Handle the message button click
   const handlemsgClick = async () => {
+    if (!session) {
+      alert('You must be signed in to send a message.');
+      return;
+    }
+
     if (post.userId._id == session.user.id)
       return;
+    
     session.user.chatwithid = post.userId._id;
     session.user.chatwithname = post.userId.username;
     session.user.chatwithimage = post.userId.image;

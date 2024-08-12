@@ -169,6 +169,12 @@ const Nav = () => {
             </div>
           ) : (
             <>
+            <div className='flex gap-3 md:gap-5'>
+              
+              <Link href='/available-rideshares' className='black_btn'>
+                  Find RideShares
+              </Link>
+            
               {providers &&
                 Object.values(providers).map((provider) => (
                   <button
@@ -180,6 +186,7 @@ const Nav = () => {
                     Sign in
                   </button>
                 ))}
+              </div>
             </>
           )}
         </div>
