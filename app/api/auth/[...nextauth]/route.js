@@ -49,6 +49,10 @@ const handler = NextAuth({
         return false
       }
     },
+    async redirect({ url, baseUrl }) {
+      // Redirect to a specific URL and force the page to reload from the server
+      return baseUrl + '?newSession=true';  // Append a query parameter to ensure the page reloads
+    }
   }
 })
 
