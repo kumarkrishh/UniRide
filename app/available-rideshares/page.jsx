@@ -98,7 +98,7 @@ const Page = () => {
 
     return (
       <div className="flex flex-col w-full max-w-xl mx-auto mb-2 p-4 rounded-lg text-white">
-        <h1 className='text-4xl md:text-5xl font-bold text-center mt-10'>
+        <h1 className='text-4xl md:text-5xl font-bold text-center mt-5'>
           <span className='bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600'>Find Rideshares</span>
         </h1>
         <p className="text-lg text-center mt-4">
