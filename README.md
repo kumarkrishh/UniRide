@@ -2,7 +2,6 @@
 <a id="readme-top"></a>
 
 
-
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -19,32 +18,24 @@
   </p>
 </div>
 
-<div>
-    <a href="https://www.loom.com/share/8caa0239a176493cb93e624587228080">
-      <p>UniRide - 7 July 2024 - Watch Video</p>
-    </a>
-    <a href="https://www.loom.com/share/8caa0239a176493cb93e624587228080">
-      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/8caa0239a176493cb93e624587228080-with-play.gif">
-    </a>
-</div>
-
-
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
-### Welcome to **UniRide** 
-The carpooling platform tailored for college students. UniRide makes it easy to share rides with fellow students, helping you cut down on travel costs and get to places like the airport without breaking the bank.
+<div align="center">
+  <p><strong>Website Demo</strong></p>
+  <a href="https://www.youtube.com/watch?v=7md8gnxUIRQ">
+    <img src="https://cdn.loom.com/sessions/thumbnails/8caa0239a176493cb93e624587228080-with-play.gif" alt="UniRide Demo" style="max-width:300px;">
+  </a>
+</div>
 
-### Why UniRide?
-Here’s why students love our platform:
+### Welcome to **UniRide**
+UniRide is the premier carpooling platform designed specifically for college students. By facilitating ride-sharing among peers, UniRide helps reduce travel costs, minimize environmental impact, and ensure safe and reliable transportation options. Here’s what makes UniRide the top choice:
 
-- **Easy Connections**: Find students who are going the same way you are. Whether it’s daily commutes, weekend getaways, or a ride to the airport, UniRide connects you quickly and efficiently.
-- **Save Money**: Splitting the cost of trips with other students means more money in your pocket for other important things. It’s perfect for regular trips and essential travel to the airport.
-- **Eco-Friendly**: Sharing rides means fewer cars on the road. This reduces traffic and pollution, making our campus and community cleaner and greener.
-- **Safe Travel**: Safety is our priority. UniRide checks that all users are verified students, so you can feel secure with your travel buddies.
+- **Easy Connections**: Seamlessly find and connect with fellow students who share your travel routes. Perfect for daily commutes, weekend explorations, or essential trips like reaching the airport.
+- **Cost-Effective**: Share the cost of travel with peers to keep more money in your wallet for books, food, or a night out.
+- **Eco-Friendly**: Fewer cars mean less traffic and pollution. Help us make our campus and community cleaner and greener.
+- **Safety First**: We prioritize your safety by ensuring all users are verified students, creating a trusted network of travel companions.
 
-Join UniRide today and start saving on your travel costs, traveling smarter and more sustainably!
-
+Join UniRide today to start making your journeys more affordable, enjoyable, and eco-friendly!
 
 ### Built With
 
