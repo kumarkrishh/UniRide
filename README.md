@@ -6,16 +6,20 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="public/assets/images/UniRidetwitterlogo.png" alt="Logo" width="80" height="80">
+    <img src="public/assets/images/UniRidetwitterlogo.png" alt="Logo" width="100" height="100">
   </a>
 
-  <h3 align="center">UniRide</h3>
-
   <p align="center">
+    <br/>
     Your go-to carpool network for college students!
-    <br />
-    <a href="https://bruin-ride-wl7n-git-main-krishkumars-projects.vercel.app/" target="_blank">Live Website</a>
   </p>
+</div>
+
+<div align="center">
+ 
+
+[**Live Website**](https://bruin-ride-wl7n-git-main-krishkumars-projects.vercel.app/)
+
 </div>
 
 ## About The Project
