@@ -8,6 +8,8 @@ import axios from 'axios';
 import { FiCalendar, FiClock, FiMessageCircle } from 'react-icons/fi';
 import { FaCar } from 'react-icons/fa';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { AiOutlineMessage } from "react-icons/ai";
+
 
 const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
   const { data: session } = useSession();
@@ -127,9 +129,11 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
               className="text-white hover:text-gray-300 relative"
               onClick={() => handlemsgClick(post)}
             >
-              <div className="absolute inset-0 w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-indigo-600 opacity-50" style={{ top: '-5px', left: '-6px' }}></div>
-              <FiMessageCircle size={28} className="relative z-10" />
+              <div className="absolute inset-0 w-10 h-10 rounded-full  opacity-50" style={{ top: '-5px', left: '-6px' }}></div>
+              <FiMessageCircle size={30} className="relative z-10"/>
+              
             </button>
+            
           )}
           {session?.user.id === post.userId._id && pathName === "/my-trips" && (
             <>

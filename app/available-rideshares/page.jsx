@@ -21,7 +21,20 @@ const Page = () => {
 
     useEffect(() => {
         fetchCarpoolData();
-        loadGoogleMapsScript(); 
+
+        // Load Google Maps script and initialize autocomplete
+        const loadGoogleMapsScript = () => {
+          if (document.querySelector('script[src^="https://maps.googleapis.com/maps/api/js"]')) return;
+          const script = document.createElement('script');
+          script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
+          script.async = true;
+          script.defer = true;
+          script.onload = () => initAutocomplete();
+          document.head.appendChild(script);
+        };
+
+        loadGoogleMapsScript();
+
     }, []);
 
     const fetchCarpoolData = async () => {
@@ -49,15 +62,6 @@ const Page = () => {
         setLoading(false); 
     };
 
-    const loadGoogleMapsScript = () => {
-        if (document.querySelector('script[src^="https://maps.googleapis.com/maps/api/js"]')) return;
-        const script = document.createElement('script');
-        script.src = `https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY}&libraries=places`;
-        script.async = true;
-        script.defer = true;
-        script.onload = () => initAutocomplete();
-        document.head.appendChild(script);
-    };
 
     const initAutocomplete = () => {
         if (!window.google) return;
@@ -99,13 +103,14 @@ const Page = () => {
     };
 
     return (
-      <div className="flex flex-col w-full max-w-xl mx-auto mb-2 p-4 rounded-lg text-white">
-        <h1 className='text-4xl md:text-5xl font-bold text-center mt-5'>
+      <div className="flex flex-col w-full max-w-xl mx-auto mb-2 p-4 rounded-lg text-white pt-32">
+        <h1 className='text-4xl md:text-5xl font-bold text-center'>
           <span className='bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600'>Find Rideshares</span>
         </h1>
         <p className="text-lg text-center mt-4">
           Explore a variety of ride requests from our community. Find a match for your route and connect instantly!
         </p>
+    
 
         {/* Search Filters */}
         <div className="flex justify-center items-center space-x-4 mt-6">

@@ -1,14 +1,11 @@
 "use client";
 
-import React from 'react';
-import { motion, useAnimation } from 'framer-motion';
-import { useRef, useEffect, useState } from 'react';
-import PromptCard from '@components/PromptCard';
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import { useRouter } from "next/navigation";
-import { signIn, signOut, useSession, getProviders } from "next-auth/react";
+import { signIn, useSession, getProviders } from "next-auth/react";
 
 const Home = () => {
-  const controls = useAnimation();
   const router = useRouter();
   const [providers, setProviders] = useState(null);
   const { data: session } = useSession();
@@ -21,87 +18,128 @@ const Home = () => {
   }, []);
 
   const handleGetStarted = () => {
-    /*if (session) {
-      // If the user is logged in, route to the desired page
-      router.push('/available-rideshares'); 
-    } else {
-      // If the user is not logged in, proceed with the normal sign-in process
-      if (providers) {
-        Object.values(providers).forEach((provider) => {
-          signIn(provider.id);
-        });
-      }
-    }*/
-
-      router.push('/available-rideshares'); 
-
+    router.push('/available-rideshares');
   };
 
   return (
-    <div className="w-full z-0" style={{ marginTop: '-75px' }}>
+    <div className="w-full">
       {/* Hero Section */}
       <section className="relative text-white overflow-hidden">
-        <img className="w-full h-auto absolute inset-0 object-contain" src="/assets/images/hero1final.png" alt="Campus View" style={{ opacity: '0.3' }} />
-        <div className="relative z-10 p-10 flex flex-col justify-center items-center" style={{ height: '100vh' }}>
-          <h1 className="text-6xl font-bold mb-6" style={{ marginTop: '-250px' }}>Connect & Commute</h1>
-          <p className="text-2xl max-w-4xl text-center mt-6">
-            Expand your college experience with UniRide, your go-to carpool network. Whether it's a ride to campus, a weekend escape, or a trip to the city, connect with fellow students and travel smarter together.
+        {/* Background image */}
+        <img
+          className="w-full h-full absolute inset-0 object-cover"
+          src="/assets/images/hero1final.png"
+          alt="Campus View"
+          style={{ opacity: '0.3' }}
+        />
+
+        {/* Centered content */}
+        <div
+          className="relative z-10 px-6 sm:px-10 flex flex-col justify-center items-center text-center"
+          style={{ height: '100vh' }}
+        >
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-4 mt-[-100px] sm:mt-[-200px] lg:mt-[-250px]">
+            Connect & Commute
+          </h1>
+          <p className="text-base sm:text-xl max-w-2xl sm:max-w-3xl mt-4 sm:mt-6">
+            Expand your college experience with UniRide, your go-to carpool network.
+            Whether it's a ride to campus, a weekend escape, or a trip to the city,
+            connect with fellow students and travel smarter together.
           </p>
-          <button className="mt-10 bg-gradient-to-r from-blue-600 to-blue-600 text-white font-semibold py-3 px-8 rounded-full shadow-md hover:shadow-lg transform transition-all duration-300 ease-in-out text-lg hover:scale-105"
-   onClick={handleGetStarted}>
+          <button
+            className="mt-8 sm:mt-10 bg-blue-600 text-white font-semibold py-2 px-6 sm:py-3 sm:px-8 rounded-full shadow-md hover:shadow-lg transform transition-all duration-300 ease-in-out text-base sm:text-lg hover:scale-105"
+            onClick={handleGetStarted}
+          >
             Get Started
           </button>
+        </div>
+
+        {/* Wave divider */}
+        <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-[0]">
+          <svg
+            viewBox="0 0 1440 320"
+            className="w-full h-[80px] sm:h-[100px]"
+            preserveAspectRatio="none"
+          >
+            <path
+              fill="#141d26"
+              fillOpacity="1"
+              d="M0,256L80,240C160,224,320,192,480,197.3C640,203,800,245,960,240C1120,235,1280,181,1360,154.7L1440,128V320H0Z"
+            />
+          </svg>
         </div>
       </section>
 
       {/* How It Works Section */}
-      <section className="my-12 text-gray-300">
-        <div className="container mx-auto px-6">
-          <h2 className="text-6xl font-semibold text-center mb-10">How It Works</h2>
-          <div className="flex flex-col items-center mt-8 space-y-10 rounded-full">
-            {/* Each motion.div represents a step in the process */}
-            <motion.div
-              className="flex flex-col md:flex-row items-center justify-center text-center p-8 w-full text-white rounded-xl overflow-hidden"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <img src="/assets/images/form1.png" alt="Fill Form" className="rounded-lg object-contain" style={{ maxHeight: '350px' }} />
-              <div className="text-left max-w-md ml-8 mr-10" style={{ marginTop: '-100px' }}>
-                <span className="text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600">Find</span>
-                <p className="mt-5 text-xl leading-relaxed tracking-wide">Fill out a simple form to tell us your travel details and preferences. Our system is designed to connect you with other students who share similar routes and schedules, making every commute efficient and environmentally friendly.</p>
-              </div>
-            </motion.div>
+      <section className="bg-[#141d26] text-white py-24 px-6 sm:px-10 lg:px-16">
+        <h2 className="text-4xl sm:text-5xl font-extrabold text-center mb-20">How It Works</h2>
 
-            <motion.div
-              className="flex flex-col md:flex-row-reverse items-center justify-center text-center p-8 w-full text-white rounded-xl overflow-hidden"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <img src="/assets/images/results1.png" alt="View Matches" className="rounded-lg object-contain" style={{ maxHeight: '270px' }} />
-              <div className="text-left max-w-md mr-20" style={{ marginTop: '-50px' }}>
-                <span className="text-left text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600">Request</span>
-                <p className="mt-5 text-xl leading-relaxed tracking-wide">See a list of potential ride matches based on your route and schedule. Our platform ensures that all matches are verified students for safety and reliability.</p>
-              </div>
-            </motion.div>
+        <div className="space-y-16 max-w-6xl mx-auto">
+          {/* Step: Find */}
+          <motion.div
+            className="bg-[#1b2635] rounded-2xl p-8 sm:p-12 shadow-lg flex flex-col lg:flex-row items-center gap-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex-1 text-center lg:text-left">
+              <div className="mb-2 text-sm uppercase tracking-wider text-blue-400">Step 1</div>
+              <h3 className="text-3xl sm:text-4xl font-bold text-blue-300 mb-4">Find</h3>
+              <p className="text-lg leading-relaxed text-gray-200">
+                Fill out a quick form with your travel plans. UniRide connects you with fellow students who are heading the same way.
+              </p>
+            </div>
+            <img
+              src="/assets/images/form1.png"
+              alt="Fill Form"
+              className="flex-1 max-w-sm w-full rounded-xl object-contain"
+            />
+          </motion.div>
 
-            <motion.div
-              className="flex flex-col md:flex-row items-center justify-center text-center p-8 w-full text-white rounded-xl overflow-hidden"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-            >
-              <img src="/assets/images/chatpic.png" alt="Message" className="rounded-lg object-contain" style={{ maxHeight: '300px' }} />
-              <div className="text-left max-w-md ml-8 mr-8" style={{ marginTop: '-50px' }}>
-                <span className="text-left text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-indigo-600">Connect</span>
-                <p className="mt-5 text-xl leading-relaxed tracking-wide">Use our built-in messaging system to connect with your matches. Arrange specifics like pickup points, times, and shared costs directly through the platform. Commuting together not only saves you money but also reduces your carbon footprint.</p>
-              </div>
-            </motion.div>
-          </div>
+          {/* Step: Request */}
+          <motion.div
+            className="bg-[#1b2635] rounded-2xl p-8 sm:p-12 shadow-lg flex flex-col lg:flex-row-reverse items-center gap-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex-1 text-center lg:text-left">
+              <div className="mb-2 text-sm uppercase tracking-wider text-blue-400">Step 2</div>
+              <h3 className="text-3xl sm:text-4xl font-bold text-blue-300 mb-4">Request</h3>
+              <p className="text-lg leading-relaxed text-gray-200">
+                Browse matching rides. View trusted student profiles and request a rideshare with a tap.
+              </p>
+            </div>
+            <img
+              src="/assets/images/results1.png"
+              alt="View Matches"
+              className="flex-1 max-w-sm w-full rounded-xl object-contain"
+            />
+          </motion.div>
+
+          {/* Step: Connect */}
+          <motion.div
+            className="bg-[#1b2635] rounded-2xl p-8 sm:p-12 shadow-lg flex flex-col lg:flex-row items-center gap-10"
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
+            <div className="flex-1 text-center lg:text-left">
+              <div className="mb-2 text-sm uppercase tracking-wider text-blue-400">Step 3</div>
+              <h3 className="text-3xl sm:text-4xl font-bold text-blue-300 mb-4">Connect</h3>
+              <p className="text-lg leading-relaxed text-gray-200">
+                Chat, coordinate pickup points and times, and hit the road. It's cheaper, greener, and more fun.
+              </p>
+            </div>
+            <img
+              src="/assets/images/chatpic.png"
+              alt="Chat"
+              className="flex-1 max-w-sm w-full rounded-xl object-contain"
+            />
+          </motion.div>
         </div>
       </section>
     </div>
