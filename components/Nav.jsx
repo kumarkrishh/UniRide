@@ -26,17 +26,29 @@ const theme = createTheme({
     MuiMenu: {
       styleOverrides: {
         paper: {
-          backgroundColor: '#2a394b',
-          color: '#fff',
+          backgroundColor: 'rgba(28, 37, 48, 0.7)',
+          backdropFilter: 'blur(12px)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '16px',
+          boxShadow: '0 8px 24px rgba(0,0,0,0.3)',
+          padding: '8px',
         }
       }
     },
     MuiMenuItem: {
       styleOverrides: {
         root: {
+          borderRadius: '8px',
+          padding: '10px 16px',
+          transition: 'background-color 0.2s ease',
+          '&:hover': {
+            backgroundColor: 'rgba(255, 255, 255, 0.08)',
+          },
           '& .MuiListItemIcon-root': {
-            color: '#fff',
-          }
+            color: '#ffffff',
+            minWidth: '36px',
+          },
+          color: '#ffffff'
         }
       }
     }
@@ -90,7 +102,7 @@ const Nav = () => {
 
   return (
     <div className='w-full flex justify-center fixed top-0 z-50'>
-      <nav className='flex-between w-full max-w-6xl px-4 py-2 bg-[#1c2530]/80 backdrop-blur-md shadow-md border border-white/10 rounded-full mt-4'>
+      <nav className='flex-between w-[92%] max-w-6xl px-4 py-2 bg-[#1c2530]/70 backdrop-blur-md shadow-md border border-white/10 rounded-full mt-4'>
         <Link href='/' className='flex gap-2 flex-center mt-1'>
           <Image
             src='/assets/images/logo5.png'
@@ -174,11 +186,11 @@ const Nav = () => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className='lg:hidden absolute top-[70px] w-full max-w-6xl px-4 py-4 bg-[#1c2530] rounded-lg shadow-lg z-40'
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.25 }}
+          className="lg:hidden absolute top-[70px] w-[92%] max-w-6xl px-4 py-6 backdrop-blur-md bg-[#1c2530]/70 border border-white/10 shadow-xl rounded-2xl z-40"
           >
             {session?.user ? (
               <>
