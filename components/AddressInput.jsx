@@ -251,30 +251,33 @@ const AddressInput = () => {
             transition={{ duration: 0.5 }}
             className="relative w-full mb-4"
           >
-            <div className="flex gap-4 mb-6">
-            <div className="flex flex-col flex-1">
+            <div className="flex flex-col sm:flex-row gap-4 mb-6 w-full">
+              {/* Travel Date */}
+              <div className="flex flex-col flex-1">
                 <label htmlFor="travel-date" className="block text-sm font-medium text-gray-300 mb-2">Travel Date</label>
                 <DatePicker
                   selected={date}
                   onChange={(date) => setDate(date)}
-                  className=" p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 text-white w-full"
+                  className="p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 text-white w-full"
                   placeholderText="Select a date"
                   id="travel-date"
                   minDate={new Date()}
                 />
               </div>
+
+              {/* Travel Time */}
               <div className="flex flex-col flex-1">
-                <label htmlFor="travel-time" className="mt-0.5block text-sm font-medium text-gray-300 mb-2">Travel Time</label>
+                <label htmlFor="travel-time" className="block text-sm font-medium text-gray-300 mb-2">Travel Time</label>
                 <input
                   type="time"
                   id="travel-time"
-                  className="p-2.5 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 text-white"
-                  value={time || "--:--"} // Use "--:--" as the default display value
+                  className="p-3 border border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 text-white w-full"
+                  value={time || "--:--"}
                   onChange={e => setTime(e.target.value)}
-                  onFocus={e => e.target.showPicker()} // Show picker when the input gains focus
                 />
               </div>
             </div>
+
             <style jsx>{`
               /* Hide the native time picker icon for WebKit browsers (Chrome, Safari) */
               input[type="time"]::-webkit-calendar-picker-indicator {

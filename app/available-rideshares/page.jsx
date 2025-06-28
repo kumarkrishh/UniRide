@@ -113,36 +113,37 @@ const Page = () => {
     
 
         {/* Search Filters */}
-        <div className="flex justify-center items-center space-x-4 mt-6">
+        <div className="flex flex-col md:flex-row items-center gap-4 mt-6 w-full max-w-2xl mx-auto">
+          {/* Location input — stays full width */}
           <input
             type="text"
             id="location-input"
             placeholder="Search by destination"
-            className="flex-grow p-3 border border-gray-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
+            className="w-full p-3 border border-gray-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
             value={searchQuery}
             onChange={e => setSearchQuery(e.target.value)}
-            style={{ flexBasis: '60%' }} // Larger space for location input
           />
 
-        <div className="w-36"> {/* Wrapper div with fixed width */}
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date) => setSelectedDate(date)}
-              className="w-full p-3 border border-gray-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
-              placeholderText="Select date"
-              minDate={new Date()}
-            />
+          {/* Date and Button — inline even on mobile */}
+          <div className="flex w-full gap-4">
+            <div className="w-1/2">
+              <DatePicker
+                selected={selectedDate}
+                onChange={(date) => setSelectedDate(date)}
+                className="w-full p-3 border border-gray-800 rounded-lg focus:ring-2 focus:ring-blue-600 focus:outline-none bg-gray-700 placeholder-gray-400 text-white"
+                placeholderText="Select date"
+                minDate={new Date()}
+              />
+            </div>
+
+            <button
+              onClick={handleSearchSubmit}
+              className="w-1/2 px-6 py-3 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg"
+            >
+              Search
+            </button>
           </div>
-
-          <button
-            onClick={handleSearchSubmit}
-            className="px-6 py-3 font-bold text-white bg-blue-600 rounded-md hover:bg-blue-700 transition duration-300 ease-in-out shadow-lg"
-    style={{ flexBasis: '20%' }} // Same space as date picker for search button
-          >
-            Search
-          </button>
         </div>
-
 
         {loading ? (
           <div className="flex justify-center items-center mt-10">
