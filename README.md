@@ -1,39 +1,9 @@
-
-<a id="readme-top"></a>
-
-
-
-<!-- PROJECT LOGO -->
-<br />
-<div align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="public/assets/images/UniRidetwitterlogo.png" alt="Logo" width="80" height="80">
-  </a>
-
-  <h3 align="center">UniRide</h3>
-
-  <p align="center">
-    Your go-to carpool network for college students!
-    <br />
-    <a href="https://bruin-ride-wl7n-git-main-krishkumars-projects.vercel.app/" target="_blank">Live Website</a>
-  </p>
-</div>
-
-<div>
-    <a href="https://www.loom.com/share/8caa0239a176493cb93e624587228080">
-      <p>UniRide - 7 July 2024 - Watch Video</p>
-    </a>
-    <a href="https://www.loom.com/share/8caa0239a176493cb93e624587228080">
-      <img style="max-width:300px;" src="https://cdn.loom.com/sessions/thumbnails/8caa0239a176493cb93e624587228080-with-play.gif">
-    </a>
-</div>
-
+# UniRide [**(Live Website)**](https://bruin-ride-wl7n.vercel.app/)
 
 <!-- ABOUT THE PROJECT -->
-## About The Project
+## Overview
+Forget group chats and flaky ride plans. UniRide is the only carpooling app made for college life. Whether it’s campus, the airport, or a weekend trip, we’ve got your ride covered.
 
-### Welcome to **UniRide** 
-The carpooling platform tailored for college students. UniRide makes it easy to share rides with fellow students, helping you cut down on travel costs and get to places like the airport without breaking the bank.
 
 ### Why UniRide?
 Here’s why students love our platform:
